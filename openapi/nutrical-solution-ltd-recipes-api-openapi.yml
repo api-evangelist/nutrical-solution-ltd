@@ -1,0 +1,408 @@
+openapi: 3.0.3
+info:
+  title: NutriCal Food & Nutrition Entity Recipes API
+  version: '2.0'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  contact:
+    name: NutriCal
+    url: https://www.nutrical.co
+    email: info@nutrical.co
+  x-provenance:
+    generated: '2026-07-20'
+    method: generated
+    source: https://docs.nutrical.co (GitBook) — faithfully transcribed from the published NutriCal API reference; NutriCal publishes no OpenAPI of its own.
+servers:
+- url: https://api.nutrical.co
+  description: Production
+- url: https://preprodapi.nutrical.co
+  description: Pre-production / testing environment
+tags:
+- name: Recipes
+  description: Create, read, update, and delete recipes with nutrition analysis.
+paths:
+  /external/api/v2/recipes/:
+    get:
+      operationId: listRecipes
+      tags:
+      - Recipes
+      summary: Get recipe list
+      description: Retrieve a list of recipes, optionally filtered by search keyword, category, diet type, allergen, may-contain allergen, sub-recipe flag, and status.
+      security:
+      - AccessToken: []
+      parameters:
+      - $ref: '#/components/parameters/Search'
+      - $ref: '#/components/parameters/Paginate'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Limit'
+      - name: category_id__list
+        in: query
+        schema:
+          type: string
+        description: Filter by category id.
+      - name: diet_type_id__list
+        in: query
+        schema:
+          type: string
+        description: Filter by diet type id.
+      - name: allergen_id__list
+        in: query
+        schema:
+          type: string
+        description: Filter by allergen id.
+      - name: may_contain_allergen_id__list
+        in: query
+        schema:
+          type: string
+        description: Filter by may-contain allergen id.
+      - name: is_sub_recipe
+        in: query
+        schema:
+          type: integer
+        description: Filter sub-recipes.
+      - name: status__list
+        in: query
+        schema:
+          type: string
+        description: Filter by status, e.g. DRAFT, PUBLISHED.
+      responses:
+        '200':
+          description: Recipe list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecipeSummary'
+              example:
+                data:
+                - recipe_id: 66012fb56e04f02dae467994
+                  name: Vitamin D Check
+                  category:
+                    id: 66012fac0bf5649bb780809d
+                    name: Category 1
+                  allergen_id_list: []
+                  may_contain_id_list: []
+                  diet_type_id_list: []
+                  created_at: '2024-03-25T08:03:01'
+                  updated_at: '2024-03-25T08:03:01'
+                  is_sub_recipe: null
+                  cover_image: null
+                  status: DRAFT
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createRecipe
+      tags:
+      - Recipes
+      summary: Create recipe
+      security:
+      - AccessToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeInput'
+            example:
+              name: Cheese Burger
+              category_id: 66012fac0bf5649bb780809d
+              sub_category_id: 66012fb11430426b0fdb7eb6
+              is_sub_recipe: false
+              description: Cheese Burger with Double Chicken Patty
+              per_serving_weight_in_gm: 10
+              ingredient_list:
+              - quantity: 100
+                unit: G
+                ingredient_id: 65bcefbfac924f1103ba5024
+                yield_percent: 100
+      responses:
+        '200':
+          description: Recipe created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/RecipeDetail'
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /external/api/v2/recipes/{recipeId}/:
+    get:
+      operationId: getRecipe
+      tags:
+      - Recipes
+      summary: Get recipe details by ID
+      security:
+      - AccessToken: []
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Recipe detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/RecipeDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipes/{recipeId}:
+    patch:
+      operationId: updateRecipe
+      tags:
+      - Recipes
+      summary: Edit recipe
+      security:
+      - AccessToken: []
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeInput'
+      responses:
+        '200':
+          description: Recipe updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/RecipeDetail'
+                  message:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteRecipe
+      tags:
+      - Recipes
+      summary: Delete recipe
+      security:
+      - AccessToken: []
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Recipe deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: Recipe deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    ServerError:
+      description: Unexpected server error.
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+    BadRequest:
+      description: Invalid query parameters or request body.
+  parameters:
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Keyword to filter results by name.
+    Paginate:
+      name: paginate
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+      description: Set to 1 to enable pagination.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
+  schemas:
+    RecipeDetail:
+      type: object
+      properties:
+        receipe_id:
+          type: string
+        custom_id:
+          type: string
+          nullable: true
+        name:
+          type: string
+        description:
+          type: string
+        per_serving_weight_in_gm:
+          type: number
+        per_serving_selling_price:
+          type: number
+          nullable: true
+        nutrients:
+          type: array
+          items:
+            type: object
+            properties:
+              nutrient_id:
+                type: string
+              quantity:
+                type: number
+        total_yield_in_gram:
+          type: number
+        total_calorie:
+          type: number
+        allergen_id_list:
+          type: array
+          items:
+            type: string
+        diet_type_list:
+          type: array
+          items:
+            type: object
+            properties:
+              diet_type_id:
+                type: string
+              name:
+                type: string
+        ingredient_list:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              display_name:
+                type: string
+              quantity:
+                type: number
+              yield_percent:
+                type: number
+              unit:
+                type: string
+              source:
+                type: string
+    RecipeSummary:
+      type: object
+      properties:
+        recipe_id:
+          type: string
+        name:
+          type: string
+        category:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        allergen_id_list:
+          type: array
+          items:
+            type: string
+        may_contain_id_list:
+          type: array
+          items:
+            type: string
+        diet_type_id_list:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        is_sub_recipe:
+          type: boolean
+          nullable: true
+        cover_image:
+          type: string
+          nullable: true
+        status:
+          type: string
+          description: DRAFT or PUBLISHED.
+    RecipeInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        category_id:
+          type: string
+        sub_category_id:
+          type: string
+        is_sub_recipe:
+          type: boolean
+        description:
+          type: string
+        per_serving_weight_in_gm:
+          type: number
+        ingredient_list:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+              unit:
+                type: string
+              ingredient_id:
+                type: string
+              yield_percent:
+                type: number
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Entity client access token issued by the Create Entity operation.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API Key
+      description: Organization-level API key (documented header name "API Key"), used to provision entities via the Create Entity operation.

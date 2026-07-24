@@ -1,0 +1,239 @@
+openapi: 3.0.3
+info:
+  title: NutriCal Food & Nutrition Entity Recipe Categories API
+  version: '2.0'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  contact:
+    name: NutriCal
+    url: https://www.nutrical.co
+    email: info@nutrical.co
+  x-provenance:
+    generated: '2026-07-20'
+    method: generated
+    source: https://docs.nutrical.co (GitBook) — faithfully transcribed from the published NutriCal API reference; NutriCal publishes no OpenAPI of its own.
+servers:
+- url: https://api.nutrical.co
+  description: Production
+- url: https://preprodapi.nutrical.co
+  description: Pre-production / testing environment
+tags:
+- name: Recipe Categories
+  description: Manage recipe categories and sub-categories.
+paths:
+  /external/api/v2/recipe-categories/:
+    get:
+      operationId: listRecipeCategories
+      tags:
+      - Recipe Categories
+      summary: Get recipe category list
+      security:
+      - AccessToken: []
+      parameters:
+      - $ref: '#/components/parameters/Search'
+      - $ref: '#/components/parameters/Paginate'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Recipe categories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecipeCategory'
+              example:
+                data:
+                - recipe_category_id: 66012fac0bf5649bb780809d
+                  name: Category 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: addRecipeCategory
+      tags:
+      - Recipe Categories
+      summary: Add recipe category
+      security:
+      - AccessToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+              - name
+            example:
+              name: Category Name
+      responses:
+        '200':
+          description: Recipe category added.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      category_id:
+                        type: string
+                      name:
+                        type: string
+                  message:
+                    type: string
+              example:
+                data:
+                  category_id: 670d4e49ee8876a19142dffc
+                  name: Category Name
+                message: Recipe category added successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipe-categories/{recipeCategoryId}:
+    post:
+      operationId: updateRecipeCategory
+      tags:
+      - Recipe Categories
+      summary: Update recipe category
+      security:
+      - AccessToken: []
+      parameters:
+      - name: recipeCategoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+            example:
+              name: Category Name Updated
+      responses:
+        '200':
+          description: Recipe category updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      category_id:
+                        type: string
+                      name:
+                        type: string
+                  message:
+                    type: string
+              example:
+                data:
+                  category_id: 66012fac0bf5649bb780809d
+                  name: Category Name Updated
+                message: Recipe category updated successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipe-sub-categories/:
+    get:
+      operationId: listRecipeSubCategories
+      tags:
+      - Recipe Categories
+      summary: Get recipe sub-category list
+      security:
+      - AccessToken: []
+      parameters:
+      - $ref: '#/components/parameters/Search'
+      - $ref: '#/components/parameters/Paginate'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Recipe sub-categories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        recipe_sub_category_id:
+                          type: string
+                        name:
+                          type: string
+              example:
+                data:
+                - recipe_sub_category_id: 66012fac0bf5649bb780809d
+                  name: Sub Category 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    RecipeCategory:
+      type: object
+      properties:
+        recipe_category_id:
+          type: string
+        name:
+          type: string
+  parameters:
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Keyword to filter results by name.
+    Paginate:
+      name: paginate
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+      description: Set to 1 to enable pagination.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
+  responses:
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Entity client access token issued by the Create Entity operation.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API Key
+      description: Organization-level API key (documented header name "API Key"), used to provision entities via the Create Entity operation.

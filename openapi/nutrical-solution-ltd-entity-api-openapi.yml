@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: NutriCal Food & Nutrition Entity API
+  version: '2.0'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  contact:
+    name: NutriCal
+    url: https://www.nutrical.co
+    email: info@nutrical.co
+  x-provenance:
+    generated: '2026-07-20'
+    method: generated
+    source: https://docs.nutrical.co (GitBook) — faithfully transcribed from the published NutriCal API reference; NutriCal publishes no OpenAPI of its own.
+servers:
+- url: https://api.nutrical.co
+  description: Production
+- url: https://preprodapi.nutrical.co
+  description: Pre-production / testing environment
+tags:
+- name: Entity
+  description: Provision entities that own recipes and receive a client access token.
+paths:
+  /entity/create:
+    post:
+      operationId: createEntity
+      tags:
+      - Entity
+      summary: Create an entity
+      description: Create a unique entity for organizations that manage recipes for multiple entities. Returns an entity_id and a client_access_token used to authenticate subsequent entity-scoped requests.
+      security:
+      - ApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+            example:
+              email: customer_email@example.com
+      responses:
+        '200':
+          description: Entity created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entity_id:
+                    type: string
+                  client_access_token:
+                    type: string
+              example:
+                entity_id: unique_entity_id
+                client_access_token: token_for_entity_access
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Entity client access token issued by the Create Entity operation.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API Key
+      description: Organization-level API key (documented header name "API Key"), used to provision entities via the Create Entity operation.

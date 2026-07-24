@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: NutriCal Food & Nutrition Entity Ingredients API
+  version: '2.0'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  contact:
+    name: NutriCal
+    url: https://www.nutrical.co
+    email: info@nutrical.co
+  x-provenance:
+    generated: '2026-07-20'
+    method: generated
+    source: https://docs.nutrical.co (GitBook) — faithfully transcribed from the published NutriCal API reference; NutriCal publishes no OpenAPI of its own.
+servers:
+- url: https://api.nutrical.co
+  description: Production
+- url: https://preprodapi.nutrical.co
+  description: Pre-production / testing environment
+tags:
+- name: Ingredients
+  description: Search the NutriCal ingredient database (USDA + NutriCal sources).
+paths:
+  /external/api/v2/ingredients/:
+    get:
+      operationId: listIngredients
+      tags:
+      - Ingredients
+      summary: Get ingredients
+      description: Retrieve a paginated list of ingredients matching the search criteria, including ingredient names, source (USDA or NUTRICAL), and whether the ingredient is starred.
+      security:
+      - AccessToken: []
+      parameters:
+      - $ref: '#/components/parameters/Search'
+      - $ref: '#/components/parameters/Paginate'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Ingredient list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ingredient'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                status: SUCCESS
+                code: 900
+                data:
+                - ingredient_id: 65bcefbfac924f1103ba5024
+                  name: Chicken, meatless
+                  source: USDA
+                  is_starred: false
+                pagination:
+                  max_page: 19
+                  next_page: 2
+                  previous_page: null
+                  total_count: 1800
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    Ingredient:
+      type: object
+      properties:
+        ingredient_id:
+          type: string
+        name:
+          type: string
+        source:
+          type: string
+          description: USDA or NUTRICAL.
+        is_starred:
+          type: boolean
+    Pagination:
+      type: object
+      properties:
+        max_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        previous_page:
+          type: integer
+          nullable: true
+        total_count:
+          type: integer
+  responses:
+    ServerError:
+      description: Unexpected server error.
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+    BadRequest:
+      description: Invalid query parameters or request body.
+  parameters:
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Keyword to filter results by name.
+    Paginate:
+      name: paginate
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+      description: Set to 1 to enable pagination.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Entity client access token issued by the Create Entity operation.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API Key
+      description: Organization-level API key (documented header name "API Key"), used to provision entities via the Create Entity operation.

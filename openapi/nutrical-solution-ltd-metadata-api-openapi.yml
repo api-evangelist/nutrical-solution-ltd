@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: NutriCal Food & Nutrition Entity Metadata API
+  version: '2.0'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  contact:
+    name: NutriCal
+    url: https://www.nutrical.co
+    email: info@nutrical.co
+  x-provenance:
+    generated: '2026-07-20'
+    method: generated
+    source: https://docs.nutrical.co (GitBook) — faithfully transcribed from the published NutriCal API reference; NutriCal publishes no OpenAPI of its own.
+servers:
+- url: https://api.nutrical.co
+  description: Production
+- url: https://preprodapi.nutrical.co
+  description: Pre-production / testing environment
+tags:
+- name: Metadata
+  description: Public nutrient and allergen reference data.
+paths:
+  /public/api/v1/nutrients/:
+    get:
+      operationId: listNutrients
+      tags:
+      - Metadata
+      summary: Get nutrient list
+      description: Public list of nutrients with bilingual (English/Arabic) names, type (MACRO/MICRO), unit, and daily-value metadata.
+      parameters:
+      - name: nutrient_type
+        in: query
+        schema:
+          type: string
+        description: Type of nutrient, e.g. MICRO.
+      - $ref: '#/components/parameters/Search'
+      - $ref: '#/components/parameters/Paginate'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Nutrient list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Nutrient'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+  /public/api/v1/allergens/:
+    get:
+      operationId: listAllergens
+      tags:
+      - Metadata
+      summary: Get allergen list
+      parameters:
+      - $ref: '#/components/parameters/Paginate'
+      responses:
+        '200':
+          description: Allergen list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        allergen_id:
+                          type: string
+                        name:
+                          type: string
+                        icon:
+                          type: string
+              example:
+                status: SUCCESS
+                code: 900
+                data:
+                - allergen_id: 659ba3554bb465a1de36fd3b
+                  name: Peanuts
+                  icon: ''
+  /public/api/v1/may-contain-allergens/:
+    get:
+      operationId: listMayContainAllergens
+      tags:
+      - Metadata
+      summary: Get may-contain allergen list
+      parameters:
+      - $ref: '#/components/parameters/Paginate'
+      responses:
+        '200':
+          description: May-contain allergen list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        may_contain_allergen_id:
+                          type: string
+                        name:
+                          type: string
+              example:
+                status: SUCCESS
+                code: 900
+                data:
+                - may_contain_allergen_id: 663ba933145e0636856f1e81
+                  name: Mutton
+components:
+  schemas:
+    Nutrient:
+      type: object
+      properties:
+        nutrient_id:
+          type: string
+        name:
+          type: array
+          items:
+            type: object
+            properties:
+              language:
+                type: string
+              content:
+                type: string
+        nutrient_type:
+          type: string
+        unit:
+          type: string
+        code:
+          type: string
+        order:
+          type: integer
+        is_essential:
+          type: boolean
+        allowed_daily_value:
+          type: number
+        group_nutrient_id:
+          type: string
+          nullable: true
+    Pagination:
+      type: object
+      properties:
+        max_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        previous_page:
+          type: integer
+          nullable: true
+        total_count:
+          type: integer
+  parameters:
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Keyword to filter results by name.
+    Paginate:
+      name: paginate
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+      description: Set to 1 to enable pagination.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Entity client access token issued by the Create Entity operation.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API Key
+      description: Organization-level API key (documented header name "API Key"), used to provision entities via the Create Entity operation.
