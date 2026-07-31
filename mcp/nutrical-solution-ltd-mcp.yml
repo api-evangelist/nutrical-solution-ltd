@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: >-
+  Derived candidate tool list from openapi/nutrical-solution-ltd-openapi.yml
+  operations. NutriCal publishes no official hosted/remote MCP server as of this
+  pass; this is a proposed surface, not a deployed server.
+server:
+  name: nutrical
+  transport: http
+  url: null
+tools:
+  - name: list_ingredients
+    description: Search the NutriCal ingredient database.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#listIngredients
+  - name: list_recipes
+    description: List recipes with optional filters.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#listRecipes
+  - name: get_recipe
+    description: Get a recipe's full nutrition detail by id.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#getRecipe
+  - name: create_recipe
+    description: Create a recipe and get its nutrition analysis.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#createRecipe
+  - name: update_recipe
+    description: Edit an existing recipe.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#updateRecipe
+  - name: delete_recipe
+    description: Delete a recipe.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#deleteRecipe
+  - name: list_recipe_categories
+    description: List recipe categories.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#listRecipeCategories
+  - name: add_recipe_category
+    description: Add a recipe category.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#addRecipeCategory
+  - name: list_meal_plans
+    description: List meal plans.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#listMealPlans
+  - name: get_meal_plan
+    description: Get a meal plan's detail by id.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#getMealPlan
+  - name: create_meal_plan_customer
+    description: Create a meal plan customer.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#createMealPlanCustomer
+  - name: list_nutrients
+    description: List nutrient reference metadata.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#listNutrients
+  - name: list_allergens
+    description: List allergen reference metadata.
+    source_operation: openapi/nutrical-solution-ltd-openapi.yml#listAllergens

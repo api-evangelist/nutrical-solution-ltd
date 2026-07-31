@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: probed
+source: live probe of /.well-known/* on api.nutrical.co and www.nutrical.co
+hosts:
+  - host: https://api.nutrical.co
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }
+  - host: https://www.nutrical.co
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /security.txt, status: 404 }
+      - { path: /.well-known/ai-plugin.json, status: 404 }
+notes: >-
+  NutriCal publishes no /.well-known/ discovery surface on either the API host
+  or the marketing host as of this probe. Absence is recorded, not penalized.

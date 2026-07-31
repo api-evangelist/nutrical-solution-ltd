@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.nutrical.co
+description: >-
+  NutriCal exposes a pre-production environment used for testing against the
+  same API surface as production. A test Access-Token is issued per entity; the
+  docs demonstrate calls against the preprod host. NutriCal publishes no magic
+  test values (the ingredient/nutrient/allergen ids below are real reference
+  data returned by the live API, usable for read-only testing).
+environments:
+  production:
+    base_url: https://api.nutrical.co
+  preprod:
+    base_url: https://preprodapi.nutrical.co
+    note: >-
+      Pre-production host shown in the documented curl examples
+      (e.g. GET https://preprodapi.nutrical.co/external/api/v2/meal-plans/).
+credentials:
+  model: >-
+    Obtain an entity_id and client_access_token from the Create Entity operation
+    (organization API Key required); pass the token as the Access-Token header.
+  test_values_published: false
+public_read_only_endpoints:
+  - https://api.nutrical.co/public/api/v1/nutrients/
+  - https://api.nutrical.co/public/api/v1/allergens/
+  - https://api.nutrical.co/public/api/v1/may-contain-allergens/
+sample_reference_ids:
+  ingredient_id: 65bcefbfac924f1103ba5024   # "Chicken, meatless" (USDA)
+  nutrient_id: 6597f4aee4fd1647ae5e8ae5     # "Dietary Fiber"
+  allergen_id: 659ba3554bb465a1de36fd3b     # "Peanuts"
+  diet_type_id: 6597f4a8e4fd1647ae5e8a8c    # "Gluten Free"

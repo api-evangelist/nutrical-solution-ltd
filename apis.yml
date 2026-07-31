@@ -1,8 +1,30 @@
 aid: nutrical-solution-ltd
 name: Nutrical Solution Ltd
-description: Nutrical Solution Ltd is a company surfaced as a portfolio company of 500-global and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  NutriCal (Nutrical Solution Ltd) is the GCC's food nutrition and intelligence
+  platform, offering the region's first Saudi FDA / GCC-compliant food-label and
+  calorie-analysis software. Its SaaS lets restaurants, cafes, hotels, food
+  manufacturers, bakeries, catering companies, nutrition centres, and meal-plan
+  businesses register products, generate bilingual (English/Arabic) nutrition
+  and ingredient labels, manage and cost recipes, run nutrition analysis, and
+  build customer meal plans against an ingredient database of 40,000+ foods
+  sourced from USDA data and NutriCal's proprietary local database. NutriCal also
+  exposes a Food & Nutrition API so apps, programs, and websites can search
+  ingredients, create and analyze recipes, manage recipe categories, build meal
+  plans, and read nutrient and allergen metadata. Backed by 500 Global.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.nutrical.co/common/OpenGraph.png
 url: https://raw.githubusercontent.com/api-evangelist/nutrical-solution-ltd/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,15 +34,177 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Food
+- Nutrition
+- Health
+- Recipes
+- Meal Plans
+- Food Labeling
+- Compliance
+- Restaurants
+- GCC
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: nutrical-solution-ltd:nutrical-solution-ltd-entity-api
+  name: Nutrical Solution Ltd Entity API
+  description: Provision entities that own recipes and receive a client access token.
+  humanURL: https://docs.nutrical.co
+  baseURL: https://api.nutrical.co
+  tags:
+  - Entity
+  properties:
+  - type: OpenAPI
+    url: openapi/nutrical-solution-ltd-entity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nutrical.co
+  - type: APIReference
+    url: https://docs.nutrical.co
+  - type: Authentication
+    url: authentication/nutrical-solution-ltd-authentication.yml
+- aid: nutrical-solution-ltd:nutrical-solution-ltd-ingredients-api
+  name: Nutrical Solution Ltd Ingredients API
+  description: Search the NutriCal ingredient database (USDA + NutriCal sources).
+  humanURL: https://docs.nutrical.co
+  baseURL: https://api.nutrical.co
+  tags:
+  - Ingredients
+  properties:
+  - type: OpenAPI
+    url: openapi/nutrical-solution-ltd-ingredients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nutrical.co
+  - type: APIReference
+    url: https://docs.nutrical.co
+  - type: Authentication
+    url: authentication/nutrical-solution-ltd-authentication.yml
+- aid: nutrical-solution-ltd:nutrical-solution-ltd-meal-plans-api
+  name: Nutrical Solution Ltd Meal Plans API
+  description: Manage meal plans and meal-plan customers.
+  humanURL: https://docs.nutrical.co
+  baseURL: https://api.nutrical.co
+  tags:
+  - Meal Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/nutrical-solution-ltd-meal-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nutrical.co
+  - type: APIReference
+    url: https://docs.nutrical.co
+  - type: Authentication
+    url: authentication/nutrical-solution-ltd-authentication.yml
+- aid: nutrical-solution-ltd:nutrical-solution-ltd-metadata-api
+  name: Nutrical Solution Ltd Metadata API
+  description: Public nutrient and allergen reference data.
+  humanURL: https://docs.nutrical.co
+  baseURL: https://api.nutrical.co
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/nutrical-solution-ltd-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nutrical.co
+  - type: APIReference
+    url: https://docs.nutrical.co
+  - type: Authentication
+    url: authentication/nutrical-solution-ltd-authentication.yml
+- aid: nutrical-solution-ltd:nutrical-solution-ltd-recipe-categories-api
+  name: Nutrical Solution Ltd Recipe Categories API
+  description: Manage recipe categories and sub-categories.
+  humanURL: https://docs.nutrical.co
+  baseURL: https://api.nutrical.co
+  tags:
+  - Recipe Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/nutrical-solution-ltd-recipe-categories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nutrical.co
+  - type: APIReference
+    url: https://docs.nutrical.co
+  - type: Authentication
+    url: authentication/nutrical-solution-ltd-authentication.yml
+- aid: nutrical-solution-ltd:nutrical-solution-ltd-recipes-api
+  name: Nutrical Solution Ltd Recipes API
+  description: Create, read, update, and delete recipes with nutrition analysis.
+  humanURL: https://docs.nutrical.co
+  baseURL: https://api.nutrical.co
+  tags:
+  - Recipes
+  properties:
+  - type: OpenAPI
+    url: openapi/nutrical-solution-ltd-recipes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nutrical.co
+  - type: APIReference
+    url: https://docs.nutrical.co
+  - type: Authentication
+    url: authentication/nutrical-solution-ltd-authentication.yml
 common:
+- type: DomainSecurity
+  url: security/nutrical-solution-ltd-domain-security.yml
+- type: Authentication
+  url: authentication/nutrical-solution-ltd-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/nutrical-solution-ltd-agentic-access.yml
+- type: OpenAPI
+  url: openapi/nutrical-solution-ltd-openapi.yml
+- type: LLMsTxt
+  url: llms/nutrical-solution-ltd-llms.txt
+- type: WellKnown
+  url: well-known/nutrical-solution-ltd-well-known.yml
+- type: Conventions
+  url: conventions/nutrical-solution-ltd-conventions.yml
+- type: ErrorCatalog
+  url: errors/nutrical-solution-ltd-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/nutrical-solution-ltd-lifecycle.yml
+- type: Conformance
+  url: conformance/nutrical-solution-ltd-conformance.yml
+- type: DataModel
+  url: data-model/nutrical-solution-ltd-data-model.yml
+- type: MCPServer
+  url: mcp/nutrical-solution-ltd-mcp.yml
+- type: Sandbox
+  url: sandbox/nutrical-solution-ltd-sandbox.yml
+- type: Overlay
+  url: overlays/nutrical-solution-ltd-openapi-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://docs.nutrical.co
+- type: Documentation
+  url: https://docs.nutrical.co
+- type: APIReference
+  url: https://docs.nutrical.co
+- type: Blog
+  url: https://www.nutrical.co/blog/
+- type: Pricing
+  url: https://www.nutrical.co/pricing/
+- type: SignUp
+  url: https://app.nutrical.co
+- type: Login
+  url: https://app.nutrical.co
+- type: Support
+  url: https://www.nutrical.co/contact-us/
+- type: TermsOfService
+  url: https://www.nutrical.co/terms-of-sales/
+- type: PrivacyPolicy
+  url: https://www.nutrical.co/privacy-policy/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/nutrical-co/
 - type: Website
-  url: https://nutrical.co
+  url: https://www.nutrical.co
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

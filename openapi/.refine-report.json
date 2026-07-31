@@ -1,0 +1,24 @@
+{
+  "provider": "nutrical-solution-ltd",
+  "sources": [
+    "nutrical-solution-ltd-entity-api-openapi.yml",
+    "nutrical-solution-ltd-ingredients-api-openapi.yml",
+    "nutrical-solution-ltd-meal-plans-api-openapi.yml",
+    "nutrical-solution-ltd-metadata-api-openapi.yml",
+    "nutrical-solution-ltd-recipe-categories-api-openapi.yml",
+    "nutrical-solution-ltd-recipes-api-openapi.yml"
+  ],
+  "outputs": [
+    "nutrical-solution-ltd-entity-api-openapi.yml",
+    "nutrical-solution-ltd-ingredients-api-openapi.yml",
+    "nutrical-solution-ltd-meal-plans-api-openapi.yml",
+    "nutrical-solution-ltd-metadata-api-openapi.yml",
+    "nutrical-solution-ltd-recipe-categories-api-openapi.yml",
+    "nutrical-solution-ltd-recipes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

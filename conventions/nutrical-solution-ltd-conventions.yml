@@ -1,0 +1,83 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.nutrical.co — cross-cutting request/response conventions read
+  from the published NutriCal API reference and derived from
+  openapi/nutrical-solution-ltd-openapi.yml.
+description: >-
+  How the NutriCal Food & Nutrition API behaves across operations:
+  authentication style, the response envelope, pagination, versioning, host
+  environments, and error signaling. These runtime semantics are not fully
+  expressed by OpenAPI.
+
+base_url: https://api.nutrical.co
+api_style: REST over HTTPS, JSON request and response bodies
+
+authentication:
+  scheme: API key in a request header
+  variants:
+    - name: Access-Token
+      scope: Entity-scoped operations (recipes, categories, meal plans, ingredients)
+      value: The client_access_token issued by the Create Entity operation.
+    - name: API Key
+      scope: Organization-level entity provisioning (Create Entity)
+  public_endpoints:
+    - /public/api/v1/nutrients/
+    - /public/api/v1/allergens/
+    - /public/api/v1/may-contain-allergens/
+  detail: authentication/nutrical-solution-ltd-authentication.yml
+
+response_envelope:
+  supported: true
+  shape: >-
+    Many endpoints wrap payloads in a common envelope
+    { "status": "SUCCESS", "code": 900, "data": ..., "pagination": {...} }.
+    Some entity CRUD endpoints return { "data": ..., "message": "..." } without
+    the status/code fields.
+  success_code: 900
+  data_field: data
+  message_field: message
+
+pagination:
+  style: page-number (offset)
+  request_params:
+    paginate: Set to 1 to enable pagination (0 disables).
+    page: Page number to retrieve (default 1).
+    limit: Records per page (default 10).
+  response_fields:
+    max_page: Total number of pages.
+    next_page: Next page number, or null.
+    previous_page: Previous page number, or null.
+    total_count: Total number of records.
+  docs: https://docs.nutrical.co
+
+filtering:
+  supported: true
+  mechanism: >-
+    List endpoints accept a `search` keyword and, for recipes, list filters via
+    *_id__list query params (category_id__list, diet_type_id__list,
+    allergen_id__list, may_contain_allergen_id__list, status__list).
+
+idempotency:
+  supported: false
+  note: >-
+    NutriCal documents no idempotency-key header or replay semantics. Writes are
+    plain POST/PATCH/DELETE. (No Idempotency pointer is emitted for this reason.)
+
+versioning:
+  scheme: uri-path
+  current: v2 (entity/recipe/meal-plan surface); v1 (public metadata surface)
+  detail: lifecycle/nutrical-solution-ltd-lifecycle.yml
+
+environments:
+  production: https://api.nutrical.co
+  preprod: https://preprodapi.nutrical.co
+  assets_base_url: https://d1rgzvt1rjtuai.cloudfront.net/
+
+error_envelope:
+  shape: HTTP status codes (400/401/500) with the standard envelope on success.
+  detail: errors/nutrical-solution-ltd-problem-types.yml
+
+rate_limit_signaling:
+  documented: false
+  note: No rate-limit headers or quotas are documented in the public reference.

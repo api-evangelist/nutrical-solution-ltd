@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: nutrical.co
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  7 18:37:34 2026 GMT
+  hsts: false
+- host: api.nutrical.co
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 28 23:59:59 2026 GMT
+  hsts: null
+- host: preprodapi.nutrical.co
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 28 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: nutrical.co
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

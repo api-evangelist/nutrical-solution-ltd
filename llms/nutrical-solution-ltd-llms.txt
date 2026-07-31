@@ -1,0 +1,10 @@
+# Nutrical
+
+## Nutrical
+
+- [Entity](https://cartoonmango-1.gitbook.io/nutrical/entity.md)
+- [Recipes](https://cartoonmango-1.gitbook.io/nutrical/recipes.md)
+- [Ingredients](https://cartoonmango-1.gitbook.io/nutrical/ingredients.md)
+- [Recipe Categories](https://cartoonmango-1.gitbook.io/nutrical/recipe-categories.md)
+- [Meal Plan](https://cartoonmango-1.gitbook.io/nutrical/meal-plan.md)
+- [Meta Data (Nutrient and Allergen)](https://cartoonmango-1.gitbook.io/nutrical/meta-data-nutrient-and-allergen.md)

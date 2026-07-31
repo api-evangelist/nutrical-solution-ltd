@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  openapi/nutrical-solution-ltd-openapi.yml (4xx/5xx responses) and the response
+  codes documented at https://docs.nutrical.co. NutriCal does not use RFC 9457
+  problem+json; errors are signaled with HTTP status codes and a JSON envelope.
+format: http-status
+envelope:
+  success: '{ "status": "SUCCESS", "code": 900, "data": ... }'
+  note: Success responses carry status "SUCCESS" and code 900.
+problems:
+  - status: 400
+    title: Bad Request
+    description: Invalid query parameters or missing/invalid request body.
+    source_operations:
+      - openapi/nutrical-solution-ltd-openapi.yml#listIngredients
+      - openapi/nutrical-solution-ltd-openapi.yml#createRecipe
+  - status: 401
+    title: Unauthorized
+    description: Invalid or missing Access-Token or API Key.
+    remediation: >-
+      Supply a valid entity Access-Token (or organization API Key for entity
+      provisioning) in the request header.
+    source_operations:
+      - openapi/nutrical-solution-ltd-openapi.yml#listRecipes
+      - openapi/nutrical-solution-ltd-openapi.yml#createEntity
+  - status: 500
+    title: Internal Server Error
+    description: Unexpected server error.
+    source_operations:
+      - openapi/nutrical-solution-ltd-openapi.yml#listIngredients
+      - openapi/nutrical-solution-ltd-openapi.yml#createRecipe

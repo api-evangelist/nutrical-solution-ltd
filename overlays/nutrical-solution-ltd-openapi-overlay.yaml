@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for NutriCal Food & Nutrition API
+  version: 1.0.0
+extends: openapi/nutrical-solution-ltd-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-20'
+      x-apievangelist-source: https://docs.nutrical.co
+      x-api-industry: [food, nutrition, health, restaurants, compliance]
+  - target: $.info
+    update:
+      x-conventions: conventions/nutrical-solution-ltd-conventions.yml
+      x-error-catalog: errors/nutrical-solution-ltd-problem-types.yml
+      x-data-model: data-model/nutrical-solution-ltd-data-model.yml
+  - target: $.tags
+    update:
+      - name: Metadata
+        x-public: true
+        description: >-
+          Public nutrient and allergen reference data — no authentication
+          required.

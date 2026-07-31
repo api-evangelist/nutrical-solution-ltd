@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from openapi/nutrical-solution-ltd-openapi.yml (securitySchemes,
+  pagination params, error responses) and https://docs.nutrical.co. NutriCal's
+  domain-level "compliance" is regulatory food-labeling compliance (Saudi FDA /
+  GCC), not a security-certification program.
+standards:
+  - id: api-key-auth
+    conforms: true
+    evidence: openapi securitySchemes define two apiKey (header) schemes — Access-Token and API Key.
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 security scheme; authentication is header API keys only.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration (probed 404).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use HTTP status codes with a status/code JSON envelope, not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: Page-number pagination via paginate / page / limit with max_page/next_page/total_count.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key header or replay semantics documented.
+  - id: saudi-fda-food-labeling
+    conforms: true
+    evidence: >-
+      NutriCal generates Saudi FDA / GCC-compliant nutrition and ingredient
+      food labels in English and Arabic (https://www.nutrical.co/food-label/).
+    domain: regulatory

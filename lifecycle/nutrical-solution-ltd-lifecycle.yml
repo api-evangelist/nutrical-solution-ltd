@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from openapi/nutrical-solution-ltd-openapi.yml server + path
+  versioning and https://docs.nutrical.co. No published deprecation policy,
+  SLA, or status page was found.
+versioning:
+  scheme: uri-path
+  versions:
+    - version: v2
+      surface: Entity, recipes, recipe-categories, meal-plans (/external/api/v2/*)
+    - version: v1
+      surface: Public nutrient/allergen metadata (/public/api/v1/*)
+  docs: https://docs.nutrical.co
+environments:
+  production: https://api.nutrical.co
+  preprod: https://preprodapi.nutrical.co
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy or RFC 8594 Sunset/Deprecation header support documented.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

@@ -1,0 +1,915 @@
+openapi: 3.0.3
+info:
+  title: NutriCal Food & Nutrition API
+  version: '2.0'
+  description: >-
+    The NutriCal API powers apps, programs, and websites with NutriCal's
+    food and nutrition intelligence for the GCC and beyond: an ingredient
+    database of 40,000+ foods (USDA + NutriCal proprietary), recipe management
+    and nutrition analysis, recipe categories, meal-plan management with
+    per-customer meal plans, and nutrient/allergen metadata used for Saudi
+    FDA / GCC-compliant food labeling. Two public metadata endpoints require
+    no authentication; entity-scoped recipe, category, and meal-plan operations
+    are authenticated with an entity Access-Token; entity provisioning uses an
+    organization API Key.
+  contact:
+    name: NutriCal
+    url: https://www.nutrical.co
+    email: info@nutrical.co
+  x-provenance:
+    generated: '2026-07-20'
+    method: generated
+    source: https://docs.nutrical.co (GitBook) — faithfully transcribed from the
+      published NutriCal API reference; NutriCal publishes no OpenAPI of its own.
+servers:
+  - url: https://api.nutrical.co
+    description: Production
+  - url: https://preprodapi.nutrical.co
+    description: Pre-production / testing environment
+tags:
+  - name: Entity
+    description: Provision entities that own recipes and receive a client access token.
+  - name: Ingredients
+    description: Search the NutriCal ingredient database (USDA + NutriCal sources).
+  - name: Recipe Categories
+    description: Manage recipe categories and sub-categories.
+  - name: Recipes
+    description: Create, read, update, and delete recipes with nutrition analysis.
+  - name: Meal Plans
+    description: Manage meal plans and meal-plan customers.
+  - name: Metadata
+    description: Public nutrient and allergen reference data.
+paths:
+  /entity/create:
+    post:
+      operationId: createEntity
+      tags: [Entity]
+      summary: Create an entity
+      description: >-
+        Create a unique entity for organizations that manage recipes for
+        multiple entities. Returns an entity_id and a client_access_token used
+        to authenticate subsequent entity-scoped requests.
+      security:
+        - ApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required: [email]
+            example:
+              email: customer_email@example.com
+      responses:
+        '200':
+          description: Entity created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entity_id:
+                    type: string
+                  client_access_token:
+                    type: string
+              example:
+                entity_id: unique_entity_id
+                client_access_token: token_for_entity_access
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/ingredients/:
+    get:
+      operationId: listIngredients
+      tags: [Ingredients]
+      summary: Get ingredients
+      description: >-
+        Retrieve a paginated list of ingredients matching the search criteria,
+        including ingredient names, source (USDA or NUTRICAL), and whether the
+        ingredient is starred.
+      security:
+        - AccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/Search'
+        - $ref: '#/components/parameters/Paginate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Ingredient list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Ingredient' }
+                  pagination: { $ref: '#/components/schemas/Pagination' }
+              example:
+                status: SUCCESS
+                code: 900
+                data:
+                  - ingredient_id: 65bcefbfac924f1103ba5024
+                    name: Chicken, meatless
+                    source: USDA
+                    is_starred: false
+                pagination:
+                  max_page: 19
+                  next_page: 2
+                  previous_page: null
+                  total_count: 1800
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /external/api/v2/recipe-categories/:
+    get:
+      operationId: listRecipeCategories
+      tags: [Recipe Categories]
+      summary: Get recipe category list
+      security:
+        - AccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/Search'
+        - $ref: '#/components/parameters/Paginate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Recipe categories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/RecipeCategory' }
+              example:
+                data:
+                  - recipe_category_id: 66012fac0bf5649bb780809d
+                    name: Category 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: addRecipeCategory
+      tags: [Recipe Categories]
+      summary: Add recipe category
+      security:
+        - AccessToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+              required: [name]
+            example: { name: Category Name }
+      responses:
+        '200':
+          description: Recipe category added.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      category_id: { type: string }
+                      name: { type: string }
+                  message: { type: string }
+              example:
+                data: { category_id: 670d4e49ee8876a19142dffc, name: Category Name }
+                message: Recipe category added successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipe-categories/{recipeCategoryId}:
+    post:
+      operationId: updateRecipeCategory
+      tags: [Recipe Categories]
+      summary: Update recipe category
+      security:
+        - AccessToken: []
+      parameters:
+        - name: recipeCategoryId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+            example: { name: Category Name Updated }
+      responses:
+        '200':
+          description: Recipe category updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      category_id: { type: string }
+                      name: { type: string }
+                  message: { type: string }
+              example:
+                data: { category_id: 66012fac0bf5649bb780809d, name: Category Name Updated }
+                message: Recipe category updated successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipe-sub-categories/:
+    get:
+      operationId: listRecipeSubCategories
+      tags: [Recipe Categories]
+      summary: Get recipe sub-category list
+      security:
+        - AccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/Search'
+        - $ref: '#/components/parameters/Paginate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Recipe sub-categories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        recipe_sub_category_id: { type: string }
+                        name: { type: string }
+              example:
+                data:
+                  - recipe_sub_category_id: 66012fac0bf5649bb780809d
+                    name: Sub Category 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipes/:
+    get:
+      operationId: listRecipes
+      tags: [Recipes]
+      summary: Get recipe list
+      description: >-
+        Retrieve a list of recipes, optionally filtered by search keyword,
+        category, diet type, allergen, may-contain allergen, sub-recipe flag,
+        and status.
+      security:
+        - AccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/Search'
+        - $ref: '#/components/parameters/Paginate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - { name: category_id__list, in: query, schema: { type: string }, description: Filter by category id. }
+        - { name: diet_type_id__list, in: query, schema: { type: string }, description: Filter by diet type id. }
+        - { name: allergen_id__list, in: query, schema: { type: string }, description: Filter by allergen id. }
+        - { name: may_contain_allergen_id__list, in: query, schema: { type: string }, description: Filter by may-contain allergen id. }
+        - { name: is_sub_recipe, in: query, schema: { type: integer }, description: Filter sub-recipes. }
+        - { name: status__list, in: query, schema: { type: string }, description: 'Filter by status, e.g. DRAFT, PUBLISHED.' }
+      responses:
+        '200':
+          description: Recipe list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/RecipeSummary' }
+              example:
+                data:
+                  - recipe_id: 66012fb56e04f02dae467994
+                    name: Vitamin D Check
+                    category: { id: 66012fac0bf5649bb780809d, name: Category 1 }
+                    allergen_id_list: []
+                    may_contain_id_list: []
+                    diet_type_id_list: []
+                    created_at: '2024-03-25T08:03:01'
+                    updated_at: '2024-03-25T08:03:01'
+                    is_sub_recipe: null
+                    cover_image: null
+                    status: DRAFT
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createRecipe
+      tags: [Recipes]
+      summary: Create recipe
+      security:
+        - AccessToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RecipeInput' }
+            example:
+              name: Cheese Burger
+              category_id: 66012fac0bf5649bb780809d
+              sub_category_id: 66012fb11430426b0fdb7eb6
+              is_sub_recipe: false
+              description: Cheese Burger with Double Chicken Patty
+              per_serving_weight_in_gm: 10
+              ingredient_list:
+                - quantity: 100
+                  unit: G
+                  ingredient_id: 65bcefbfac924f1103ba5024
+                  yield_percent: 100
+      responses:
+        '200':
+          description: Recipe created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/RecipeDetail' }
+                  message: { type: string }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /external/api/v2/recipes/{recipeId}/:
+    get:
+      operationId: getRecipe
+      tags: [Recipes]
+      summary: Get recipe details by ID
+      security:
+        - AccessToken: []
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Recipe detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/RecipeDetail' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/recipes/{recipeId}:
+    patch:
+      operationId: updateRecipe
+      tags: [Recipes]
+      summary: Edit recipe
+      security:
+        - AccessToken: []
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RecipeInput' }
+      responses:
+        '200':
+          description: Recipe updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/RecipeDetail' }
+                  message: { type: string }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteRecipe
+      tags: [Recipes]
+      summary: Delete recipe
+      security:
+        - AccessToken: []
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Recipe deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+              example: { message: Recipe deleted successfully. }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/meal-plans/:
+    get:
+      operationId: listMealPlans
+      tags: [Meal Plans]
+      summary: Get meal plan list
+      security:
+        - AccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/Search'
+        - $ref: '#/components/parameters/Paginate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - { name: date, in: query, schema: { type: string, format: date }, description: 'Filter meal plans from this date (YYYY-MM-DD).' }
+        - { name: meal_plan_customer_id__list, in: query, schema: { type: string }, description: Filter by customer id or list of customer ids. }
+      responses:
+        '200':
+          description: Meal plan list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/MealPlanSummary' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/meal-plans/{mealPlanId}/:
+    get:
+      operationId: getMealPlan
+      tags: [Meal Plans]
+      summary: Get meal plan details by ID
+      security:
+        - AccessToken: []
+      parameters:
+        - name: mealPlanId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Meal plan detail.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: object }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/meal-plan-customers/:
+    get:
+      operationId: listMealPlanCustomers
+      tags: [Meal Plans]
+      summary: List meal plan customers
+      security:
+        - AccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/Search'
+        - { name: sort, in: query, schema: { type: string }, description: 'Sort by field, e.g. created.' }
+      responses:
+        '200':
+          description: Meal plan customers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/MealPlanCustomer' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createMealPlanCustomer
+      tags: [Meal Plans]
+      summary: Create meal plan customer
+      security:
+        - AccessToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MealPlanCustomerInput' }
+            example:
+              first_name: Test
+              last_name: User
+              email: test@example.com
+              country_code: '91'
+              mobile_number: '1234567891'
+              age: 20
+              height: 171
+              weight: 70
+              gender: MALE
+              information: here goes the information
+              dislikes: milk
+              unique_id: '1'
+              allergen_id_list: [6644dcb6d1e6c2b9b599f6a7]
+              diet_type_id_list: [6597f4a8e4fd1647ae5e8a8c]
+      responses:
+        '200':
+          description: Meal plan customer added.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data: { $ref: '#/components/schemas/MealPlanCustomer' }
+                  message: { type: string }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /external/api/v2/meal-plan-customers/{mealplanCustomerId}/:
+    get:
+      operationId: getMealPlanCustomer
+      tags: [Meal Plans]
+      summary: Get meal plan customer by ID
+      security:
+        - AccessToken: []
+      parameters:
+        - name: mealplanCustomerId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Meal plan customer.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data: { $ref: '#/components/schemas/MealPlanCustomer' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    patch:
+      operationId: updateMealPlanCustomer
+      tags: [Meal Plans]
+      summary: Update meal plan customer
+      security:
+        - AccessToken: []
+      parameters:
+        - name: mealplanCustomerId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MealPlanCustomerInput' }
+            example: { first_name: test, last_name: updated }
+      responses:
+        '200':
+          description: Meal plan customer updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data: { $ref: '#/components/schemas/MealPlanCustomer' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteMealPlanCustomer
+      tags: [Meal Plans]
+      summary: Delete meal plan customer
+      security:
+        - AccessToken: []
+      parameters:
+        - name: mealplanCustomerId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Meal plan customer removed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  message: { type: string }
+              example:
+                status: SUCCESS
+                code: 900
+                message: Meal plan customer removed successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /public/api/v1/nutrients/:
+    get:
+      operationId: listNutrients
+      tags: [Metadata]
+      summary: Get nutrient list
+      description: >-
+        Public list of nutrients with bilingual (English/Arabic) names, type
+        (MACRO/MICRO), unit, and daily-value metadata.
+      parameters:
+        - { name: nutrient_type, in: query, schema: { type: string }, description: 'Type of nutrient, e.g. MICRO.' }
+        - $ref: '#/components/parameters/Search'
+        - $ref: '#/components/parameters/Paginate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Nutrient list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data: { type: array, items: { $ref: '#/components/schemas/Nutrient' } }
+                  pagination: { $ref: '#/components/schemas/Pagination' }
+  /public/api/v1/allergens/:
+    get:
+      operationId: listAllergens
+      tags: [Metadata]
+      summary: Get allergen list
+      parameters:
+        - $ref: '#/components/parameters/Paginate'
+      responses:
+        '200':
+          description: Allergen list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        allergen_id: { type: string }
+                        name: { type: string }
+                        icon: { type: string }
+              example:
+                status: SUCCESS
+                code: 900
+                data:
+                  - allergen_id: 659ba3554bb465a1de36fd3b
+                    name: Peanuts
+                    icon: ''
+  /public/api/v1/may-contain-allergens/:
+    get:
+      operationId: listMayContainAllergens
+      tags: [Metadata]
+      summary: Get may-contain allergen list
+      parameters:
+        - $ref: '#/components/parameters/Paginate'
+      responses:
+        '200':
+          description: May-contain allergen list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  code: { type: integer }
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        may_contain_allergen_id: { type: string }
+                        name: { type: string }
+              example:
+                status: SUCCESS
+                code: 900
+                data:
+                  - may_contain_allergen_id: 663ba933145e0636856f1e81
+                    name: Mutton
+components:
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: Entity client access token issued by the Create Entity operation.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API Key
+      description: >-
+        Organization-level API key (documented header name "API Key"), used to
+        provision entities via the Create Entity operation.
+  parameters:
+    Search:
+      name: search
+      in: query
+      required: false
+      schema: { type: string }
+      description: Keyword to filter results by name.
+    Paginate:
+      name: paginate
+      in: query
+      required: false
+      schema: { type: integer, enum: [0, 1] }
+      description: Set to 1 to enable pagination.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema: { type: integer, default: 1 }
+      description: Page number to retrieve.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema: { type: integer, default: 10 }
+      description: Number of records per page.
+  responses:
+    BadRequest:
+      description: Invalid query parameters or request body.
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+    ServerError:
+      description: Unexpected server error.
+  schemas:
+    Pagination:
+      type: object
+      properties:
+        max_page: { type: integer }
+        next_page: { type: integer, nullable: true }
+        previous_page: { type: integer, nullable: true }
+        total_count: { type: integer }
+    Ingredient:
+      type: object
+      properties:
+        ingredient_id: { type: string }
+        name: { type: string }
+        source: { type: string, description: 'USDA or NUTRICAL.' }
+        is_starred: { type: boolean }
+    RecipeCategory:
+      type: object
+      properties:
+        recipe_category_id: { type: string }
+        name: { type: string }
+    RecipeSummary:
+      type: object
+      properties:
+        recipe_id: { type: string }
+        name: { type: string }
+        category:
+          type: object
+          properties:
+            id: { type: string }
+            name: { type: string }
+        allergen_id_list: { type: array, items: { type: string } }
+        may_contain_id_list: { type: array, items: { type: string } }
+        diet_type_id_list: { type: array, items: { type: string } }
+        created_at: { type: string }
+        updated_at: { type: string }
+        is_sub_recipe: { type: boolean, nullable: true }
+        cover_image: { type: string, nullable: true }
+        status: { type: string, description: 'DRAFT or PUBLISHED.' }
+    RecipeInput:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        category_id: { type: string }
+        sub_category_id: { type: string }
+        is_sub_recipe: { type: boolean }
+        description: { type: string }
+        per_serving_weight_in_gm: { type: number }
+        ingredient_list:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity: { type: number }
+              unit: { type: string }
+              ingredient_id: { type: string }
+              yield_percent: { type: number }
+    RecipeDetail:
+      type: object
+      properties:
+        receipe_id: { type: string }
+        custom_id: { type: string, nullable: true }
+        name: { type: string }
+        description: { type: string }
+        per_serving_weight_in_gm: { type: number }
+        per_serving_selling_price: { type: number, nullable: true }
+        nutrients:
+          type: array
+          items:
+            type: object
+            properties:
+              nutrient_id: { type: string }
+              quantity: { type: number }
+        total_yield_in_gram: { type: number }
+        total_calorie: { type: number }
+        allergen_id_list: { type: array, items: { type: string } }
+        diet_type_list:
+          type: array
+          items:
+            type: object
+            properties:
+              diet_type_id: { type: string }
+              name: { type: string }
+        ingredient_list:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              display_name: { type: string }
+              quantity: { type: number }
+              yield_percent: { type: number }
+              unit: { type: string }
+              source: { type: string }
+    MealPlanSummary:
+      type: object
+      properties:
+        meal_plan_id: { type: string }
+        name: { type: string }
+        created_at: { type: string }
+        created_user_id: { type: string }
+        updated_at: { type: string }
+        date: { type: string, format: date }
+        meal_plan_customer:
+          type: object
+          nullable: true
+          properties:
+            meal_plan_customer_id: { type: string }
+            first_name: { type: string }
+            last_name: { type: string }
+    MealPlanCustomerInput:
+      type: object
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        email: { type: string, format: email }
+        country_code: { type: string }
+        mobile_number: { type: string }
+        age: { type: integer }
+        height: { type: number }
+        weight: { type: number }
+        gender: { type: string }
+        information: { type: string }
+        dislikes: { type: string }
+        unique_id: { type: string }
+        allergen_id_list: { type: array, items: { type: string } }
+        diet_type_id_list: { type: array, items: { type: string } }
+    MealPlanCustomer:
+      allOf:
+        - $ref: '#/components/schemas/MealPlanCustomerInput'
+        - type: object
+          properties:
+            mealplan_customer_id: { type: string }
+            created_at: { type: string }
+    Nutrient:
+      type: object
+      properties:
+        nutrient_id: { type: string }
+        name:
+          type: array
+          items:
+            type: object
+            properties:
+              language: { type: string }
+              content: { type: string }
+        nutrient_type: { type: string }
+        unit: { type: string }
+        code: { type: string }
+        order: { type: integer }
+        is_essential: { type: boolean }
+        allowed_daily_value: { type: number }
+        group_nutrient_id: { type: string, nullable: true }

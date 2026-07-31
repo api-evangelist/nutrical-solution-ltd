@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/nutrical-solution-ltd-openapi.yml
+skills:
+  - file: nutrical-solution-ltd-analyze-recipe.md
+    name: Analyze a recipe's nutrition with NutriCal
+    api: openapi/nutrical-solution-ltd-openapi.yml
+    operations: [listIngredients, listRecipeCategories, createRecipe, getRecipe]
+  - file: nutrical-solution-ltd-build-meal-plan.md
+    name: Build a customer meal plan with NutriCal
+    api: openapi/nutrical-solution-ltd-openapi.yml
+    operations: [createMealPlanCustomer, listMealPlanCustomers, listMealPlans, getMealPlan]

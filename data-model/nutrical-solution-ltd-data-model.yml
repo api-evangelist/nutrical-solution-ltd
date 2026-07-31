@@ -1,0 +1,95 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from openapi/nutrical-solution-ltd-openapi.yml schemas and id-reference
+  fields (*_id, *_id_list) and the object shapes in https://docs.nutrical.co.
+id_format: >-
+  Entity ids are 24-character hex MongoDB ObjectIds (e.g. 66012fac0bf5649bb780809d);
+  no typed prefixes.
+entities:
+  - name: Entity
+    id: entity_id
+    description: An organization-scoped tenant that owns recipes; holds a client_access_token.
+  - name: Recipe
+    id: recipe_id
+    description: A recipe with ingredients, nutrition analysis, allergens, and diet types.
+  - name: RecipeCategory
+    id: recipe_category_id
+    description: A category grouping recipes.
+  - name: RecipeSubCategory
+    id: recipe_sub_category_id
+    description: A sub-category under a recipe category.
+  - name: Ingredient
+    id: ingredient_id
+    description: An ingredient from the USDA or NUTRICAL database.
+  - name: MealPlan
+    id: meal_plan_id
+    description: A dated meal plan grouping recipes into meal categories for a customer.
+  - name: MealPlanCustomer
+    id: mealplan_customer_id
+    description: An end customer a meal plan is built for.
+  - name: Nutrient
+    id: nutrient_id
+    description: Nutrient reference metadata (bilingual, MACRO/MICRO).
+  - name: Allergen
+    id: allergen_id
+    description: Allergen reference metadata.
+  - name: MayContainAllergen
+    id: may_contain_allergen_id
+    description: May-contain allergen reference metadata.
+  - name: DietType
+    id: diet_type_id
+    description: Diet type reference metadata (e.g. Gluten Free, Non-Vegetarian).
+relationships:
+  - from: Entity
+    to: Recipe
+    type: has_many
+    via: entity_id
+  - from: Recipe
+    to: RecipeCategory
+    type: belongs_to
+    via: category_id
+  - from: Recipe
+    to: RecipeSubCategory
+    type: belongs_to
+    via: sub_category_id
+  - from: Recipe
+    to: Ingredient
+    type: has_many
+    via: ingredient_list.ingredient_id
+  - from: Recipe
+    to: Allergen
+    type: has_many
+    via: allergen_id_list
+  - from: Recipe
+    to: MayContainAllergen
+    type: has_many
+    via: may_contain_id_list
+  - from: Recipe
+    to: DietType
+    type: has_many
+    via: diet_type_id_list
+  - from: Recipe
+    to: Nutrient
+    type: has_many
+    via: nutrients.nutrient_id
+  - from: MealPlan
+    to: MealPlanCustomer
+    type: belongs_to
+    via: meal_plan_customer_id
+  - from: MealPlan
+    to: Recipe
+    type: has_many
+    via: categories.recipe_list.recipe_id
+  - from: MealPlan
+    to: DietType
+    type: has_many
+    via: diet_type_id_list
+  - from: MealPlanCustomer
+    to: Allergen
+    type: has_many
+    via: allergen_id_list
+  - from: MealPlanCustomer
+    to: DietType
+    type: has_many
+    via: diet_type_id_list
