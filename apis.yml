@@ -156,7 +156,7 @@ common:
 - type: AgenticAccess
   url: agentic-access/nutrical-solution-ltd-agentic-access.yml
 - type: OpenAPI
-  url: openapi/nutrical-solution-ltd-openapi.yml
+  url: openapi/_original/nutrical-solution-ltd-openapi.yml
 - type: LLMsTxt
   url: llms/nutrical-solution-ltd-llms.txt
 - type: WellKnown
