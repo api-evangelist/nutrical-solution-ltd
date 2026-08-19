@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NutriCal Food & Nutrition Entity API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nutrical.co/entity/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "API Key",
+              "value": "{{API Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a unique entity for organizations that manage recipes for multiple entities. Returns an entity_id and a client_access_token used to authenticate subsequent entity-scoped requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

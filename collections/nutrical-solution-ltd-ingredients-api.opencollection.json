@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NutriCal Food & Nutrition Entity Ingredients API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ingredients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get ingredients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/ingredients/",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to filter results by name."
+              },
+              {
+                "name": "paginate",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to enable pagination."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated list of ingredients matching the search criteria, including ingredient names, source (USDA or NUTRICAL), and whether the ingredient is starred."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

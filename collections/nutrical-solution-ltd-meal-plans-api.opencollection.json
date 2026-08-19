@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NutriCal Food & Nutrition Entity Meal Plans API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Meal Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get meal plan list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plans/",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to filter results by name."
+              },
+              {
+                "name": "paginate",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to enable pagination."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter meal plans from this date (YYYY-MM-DD)."
+              },
+              {
+                "name": "meal_plan_customer_id__list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer id or list of customer ids."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get meal plan list"
+        },
+        {
+          "info": {
+            "name": "Get meal plan details by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plans/:mealPlanId/",
+            "params": [
+              {
+                "name": "mealPlanId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get meal plan details by ID"
+        },
+        {
+          "info": {
+            "name": "List meal plan customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plan-customers/",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to filter results by name."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort by field, e.g. created."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List meal plan customers"
+        },
+        {
+          "info": {
+            "name": "Create meal plan customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plan-customers/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create meal plan customer"
+        },
+        {
+          "info": {
+            "name": "Get meal plan customer by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plan-customers/:mealplanCustomerId/",
+            "params": [
+              {
+                "name": "mealplanCustomerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get meal plan customer by ID"
+        },
+        {
+          "info": {
+            "name": "Update meal plan customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plan-customers/:mealplanCustomerId/",
+            "params": [
+              {
+                "name": "mealplanCustomerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update meal plan customer"
+        },
+        {
+          "info": {
+            "name": "Delete meal plan customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nutrical.co/external/api/v2/meal-plan-customers/:mealplanCustomerId/",
+            "params": [
+              {
+                "name": "mealplanCustomerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete meal plan customer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

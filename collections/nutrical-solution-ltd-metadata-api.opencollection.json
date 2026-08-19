@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NutriCal Food & Nutrition Entity Metadata API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get nutrient list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/public/api/v1/nutrients/",
+            "params": [
+              {
+                "name": "nutrient_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of nutrient, e.g. MICRO."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to filter results by name."
+              },
+              {
+                "name": "paginate",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to enable pagination."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              }
+            ]
+          },
+          "docs": "Public list of nutrients with bilingual (English/Arabic) names, type (MACRO/MICRO), unit, and daily-value metadata."
+        },
+        {
+          "info": {
+            "name": "Get allergen list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/public/api/v1/allergens/",
+            "params": [
+              {
+                "name": "paginate",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to enable pagination."
+              }
+            ]
+          },
+          "docs": "Get allergen list"
+        },
+        {
+          "info": {
+            "name": "Get may-contain allergen list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/public/api/v1/may-contain-allergens/",
+            "params": [
+              {
+                "name": "paginate",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to enable pagination."
+              }
+            ]
+          },
+          "docs": "Get may-contain allergen list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

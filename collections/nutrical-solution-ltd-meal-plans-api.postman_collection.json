@@ -1,0 +1,1310 @@
+{
+  "item": [
+    {
+      "id": "0054e015-7692-4754-829f-09654109df4f",
+      "name": "Meal Plans",
+      "description": {
+        "content": "Manage meal plans and meal-plan customers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed35c28b-09c2-4ef2-b42b-aa39ceb1475e",
+          "name": "Get meal plan list",
+          "request": {
+            "name": "Get meal plan list",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plans",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Keyword to filter results by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "paginate",
+                  "value": "<integer>",
+                  "description": "Set to 1 to enable pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Filter meal plans from this date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "meal_plan_customer_id__list",
+                  "value": "<string>",
+                  "description": "Filter by customer id or list of customer ids."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c85a998-d330-4ed6-aa8e-b321e69f6ed0",
+              "name": "Meal plan list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plans",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "meal_plan_customer_id__list",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"meal_plan_id\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"string\",\n      \"created_user_id\": \"string\",\n      \"updated_at\": \"string\",\n      \"date\": \"2022-10-13\",\n      \"meal_plan_customer\": {\n        \"meal_plan_customer_id\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      }\n    },\n    {\n      \"meal_plan_id\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"string\",\n      \"created_user_id\": \"string\",\n      \"updated_at\": \"string\",\n      \"date\": \"2000-06-01\",\n      \"meal_plan_customer\": {\n        \"meal_plan_customer_id\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d673bc8-e12a-4094-b4fc-510200fee09c",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plans",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "meal_plan_customer_id__list",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e1a8fcf-acdb-476a-a4d9-ef8c5f373909",
+          "name": "Get meal plan details by ID",
+          "request": {
+            "name": "Get meal plan details by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plans",
+                ":mealPlanId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mealPlanId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "636e9f33-2818-488d-91a8-74842ac9e5c4",
+              "name": "Meal plan detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plans",
+                    ":mealPlanId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealPlanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5219663-a4de-43eb-83b4-a0605fe48cbe",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plans",
+                    ":mealPlanId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealPlanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4142c6de-0136-4de4-b4e1-bb52e7e8ee7c",
+          "name": "List meal plan customers",
+          "request": {
+            "name": "List meal plan customers",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plan-customers",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Keyword to filter results by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort by field, e.g. created."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "68d97985-79d2-4647-a7ea-b885238f1762",
+              "name": "Meal plan customers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"code\": 8871,\n  \"data\": [\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"J0WgU@rjMxvOWCPyJefaPuozFCofNnPPiTdZSeI.zu\",\n      \"country_code\": \"string\",\n      \"mobile_number\": \"string\",\n      \"age\": 920,\n      \"height\": 1839.7455124057537,\n      \"weight\": 3316.0730739922074,\n      \"gender\": \"string\",\n      \"information\": \"string\",\n      \"dislikes\": \"string\",\n      \"unique_id\": \"string\",\n      \"allergen_id_list\": [\n        \"string\",\n        \"string\"\n      ],\n      \"diet_type_id_list\": [\n        \"string\",\n        \"string\"\n      ],\n      \"mealplan_customer_id\": \"string\",\n      \"created_at\": \"string\"\n    },\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"RKy6yty8-7R8lj2@QvnAgkngxdnZSCqrTNAWvBZyhVWCBB.cqp\",\n      \"country_code\": \"string\",\n      \"mobile_number\": \"string\",\n      \"age\": 1427,\n      \"height\": 8455.670892552123,\n      \"weight\": 344.95901538432406,\n      \"gender\": \"string\",\n      \"information\": \"string\",\n      \"dislikes\": \"string\",\n      \"unique_id\": \"string\",\n      \"allergen_id_list\": [\n        \"string\",\n        \"string\"\n      ],\n      \"diet_type_id_list\": [\n        \"string\",\n        \"string\"\n      ],\n      \"mealplan_customer_id\": \"string\",\n      \"created_at\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98f25254-5fbf-43ca-b316-cea6e3c762b3",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "739d0969-995a-4040-99cd-6558ffc283b6",
+          "name": "Create meal plan customer",
+          "request": {
+            "name": "Create meal plan customer",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plan-customers",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"country_code\": \"<string>\",\n  \"mobile_number\": \"<string>\",\n  \"age\": \"<integer>\",\n  \"height\": \"<number>\",\n  \"weight\": \"<number>\",\n  \"gender\": \"<string>\",\n  \"information\": \"<string>\",\n  \"dislikes\": \"<string>\",\n  \"unique_id\": \"<string>\",\n  \"allergen_id_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"diet_type_id_list\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d891a761-ddf6-4228-ae5e-9b183e016af2",
+              "name": "Meal plan customer added.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"Test\",\n  \"last_name\": \"User\",\n  \"email\": \"test@example.com\",\n  \"country_code\": \"91\",\n  \"mobile_number\": \"1234567891\",\n  \"age\": 20,\n  \"height\": 171,\n  \"weight\": 70,\n  \"gender\": \"MALE\",\n  \"information\": \"here goes the information\",\n  \"dislikes\": \"milk\",\n  \"unique_id\": \"1\",\n  \"allergen_id_list\": [\n    \"6644dcb6d1e6c2b9b599f6a7\"\n  ],\n  \"diet_type_id_list\": [\n    \"6597f4a8e4fd1647ae5e8a8c\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"code\": 7704,\n  \"data\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"country_code\": \"<string>\",\n    \"mobile_number\": \"<string>\",\n    \"age\": \"<integer>\",\n    \"height\": \"<number>\",\n    \"weight\": \"<number>\",\n    \"gender\": \"<string>\",\n    \"information\": \"<string>\",\n    \"dislikes\": \"<string>\",\n    \"unique_id\": \"<string>\",\n    \"allergen_id_list\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"diet_type_id_list\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"mealplan_customer_id\": \"string\",\n    \"created_at\": \"string\"\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6565f3d-b094-4651-a947-378eaf903597",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"Test\",\n  \"last_name\": \"User\",\n  \"email\": \"test@example.com\",\n  \"country_code\": \"91\",\n  \"mobile_number\": \"1234567891\",\n  \"age\": 20,\n  \"height\": 171,\n  \"weight\": 70,\n  \"gender\": \"MALE\",\n  \"information\": \"here goes the information\",\n  \"dislikes\": \"milk\",\n  \"unique_id\": \"1\",\n  \"allergen_id_list\": [\n    \"6644dcb6d1e6c2b9b599f6a7\"\n  ],\n  \"diet_type_id_list\": [\n    \"6597f4a8e4fd1647ae5e8a8c\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9356da9-9e5a-4392-91b1-2ad0d2a96b52",
+          "name": "Get meal plan customer by ID",
+          "request": {
+            "name": "Get meal plan customer by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plan-customers",
+                ":mealplanCustomerId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mealplanCustomerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7e9dbfee-1b10-41d9-b541-8c7b462e0233",
+              "name": "Meal plan customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ":mealplanCustomerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealplanCustomerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"code\": 1489,\n  \"data\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"country_code\": \"<string>\",\n    \"mobile_number\": \"<string>\",\n    \"age\": \"<integer>\",\n    \"height\": \"<number>\",\n    \"weight\": \"<number>\",\n    \"gender\": \"<string>\",\n    \"information\": \"<string>\",\n    \"dislikes\": \"<string>\",\n    \"unique_id\": \"<string>\",\n    \"allergen_id_list\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"diet_type_id_list\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"mealplan_customer_id\": \"string\",\n    \"created_at\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08896cb8-e086-46ec-a975-0fe0d5599d00",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ":mealplanCustomerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealplanCustomerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c87560e1-81c0-4b3d-9727-714eb25c4b2a",
+          "name": "Update meal plan customer",
+          "request": {
+            "name": "Update meal plan customer",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plan-customers",
+                ":mealplanCustomerId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mealplanCustomerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"country_code\": \"<string>\",\n  \"mobile_number\": \"<string>\",\n  \"age\": \"<integer>\",\n  \"height\": \"<number>\",\n  \"weight\": \"<number>\",\n  \"gender\": \"<string>\",\n  \"information\": \"<string>\",\n  \"dislikes\": \"<string>\",\n  \"unique_id\": \"<string>\",\n  \"allergen_id_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"diet_type_id_list\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e9ec1e9-ed6b-45a0-8a7f-75a345644285",
+              "name": "Meal plan customer updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ":mealplanCustomerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealplanCustomerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"test\",\n  \"last_name\": \"updated\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"code\": 1489,\n  \"data\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"country_code\": \"<string>\",\n    \"mobile_number\": \"<string>\",\n    \"age\": \"<integer>\",\n    \"height\": \"<number>\",\n    \"weight\": \"<number>\",\n    \"gender\": \"<string>\",\n    \"information\": \"<string>\",\n    \"dislikes\": \"<string>\",\n    \"unique_id\": \"<string>\",\n    \"allergen_id_list\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"diet_type_id_list\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"mealplan_customer_id\": \"string\",\n    \"created_at\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "144d86e7-6567-4277-b5cb-1a0ede7e1e2a",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ":mealplanCustomerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealplanCustomerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"test\",\n  \"last_name\": \"updated\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50d22c84-f006-4997-92ca-94182144f73a",
+          "name": "Delete meal plan customer",
+          "request": {
+            "name": "Delete meal plan customer",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "meal-plan-customers",
+                ":mealplanCustomerId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mealplanCustomerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33a7d049-ae3a-4fa8-af15-22016481113a",
+              "name": "Meal plan customer removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ":mealplanCustomerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealplanCustomerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"code\": 900,\n  \"message\": \"Meal plan customer removed successfully.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2857edc1-0799-49f8-b4ff-3757a54d93ae",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "meal-plan-customers",
+                    ":mealplanCustomerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mealplanCustomerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nutrical.co",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "91df494b-704a-49b5-a9fe-e9d4124aa716",
+    "name": "NutriCal Food & Nutrition Entity Meal Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NutriCal API powers apps, programs, and websites with NutriCal's food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.\n\nContact Support:\n Name: NutriCal\n Email: info@nutrical.co",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1123 @@
+{
+  "item": [
+    {
+      "id": "13346e8b-6ecb-4c94-bc06-6ed32d2c21fc",
+      "name": "Recipes",
+      "description": {
+        "content": "Create, read, update, and delete recipes with nutrition analysis.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7f129d7-7e87-47b2-b025-55654e5fbda4",
+          "name": "Get recipe list",
+          "request": {
+            "name": "Get recipe list",
+            "description": {
+              "content": "Retrieve a list of recipes, optionally filtered by search keyword, category, diet type, allergen, may-contain allergen, sub-recipe flag, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "recipes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Keyword to filter results by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "paginate",
+                  "value": "<integer>",
+                  "description": "Set to 1 to enable pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "category_id__list",
+                  "value": "<string>",
+                  "description": "Filter by category id."
+                },
+                {
+                  "disabled": false,
+                  "key": "diet_type_id__list",
+                  "value": "<string>",
+                  "description": "Filter by diet type id."
+                },
+                {
+                  "disabled": false,
+                  "key": "allergen_id__list",
+                  "value": "<string>",
+                  "description": "Filter by allergen id."
+                },
+                {
+                  "disabled": false,
+                  "key": "may_contain_allergen_id__list",
+                  "value": "<string>",
+                  "description": "Filter by may-contain allergen id."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_sub_recipe",
+                  "value": "<integer>",
+                  "description": "Filter sub-recipes."
+                },
+                {
+                  "disabled": false,
+                  "key": "status__list",
+                  "value": "<string>",
+                  "description": "Filter by status, e.g. DRAFT, PUBLISHED."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7440e308-9aae-4d98-a524-2a519af1a7aa",
+              "name": "Recipe list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "category_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "diet_type_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allergen_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "may_contain_allergen_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_sub_recipe",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status__list",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"recipe_id\": \"66012fb56e04f02dae467994\",\n      \"name\": \"Vitamin D Check\",\n      \"category\": {\n        \"id\": \"66012fac0bf5649bb780809d\",\n        \"name\": \"Category 1\"\n      },\n      \"allergen_id_list\": [],\n      \"may_contain_id_list\": [],\n      \"diet_type_id_list\": [],\n      \"created_at\": \"2024-03-25T08:03:01\",\n      \"updated_at\": \"2024-03-25T08:03:01\",\n      \"is_sub_recipe\": null,\n      \"cover_image\": null,\n      \"status\": \"DRAFT\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7911fdc-3b77-4622-a8af-038f07dd1aaa",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "category_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "diet_type_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allergen_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "may_contain_allergen_id__list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_sub_recipe",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status__list",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "928f8799-4247-47a2-be77-98cc538ce486",
+          "name": "Create recipe",
+          "request": {
+            "name": "Create recipe",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "recipes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"sub_category_id\": \"<string>\",\n  \"is_sub_recipe\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"per_serving_weight_in_gm\": \"<number>\",\n  \"ingredient_list\": [\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c525c80-700c-4822-8757-2058e572b5ea",
+              "name": "Recipe created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Cheese Burger\",\n  \"category_id\": \"66012fac0bf5649bb780809d\",\n  \"sub_category_id\": \"66012fb11430426b0fdb7eb6\",\n  \"is_sub_recipe\": false,\n  \"description\": \"Cheese Burger with Double Chicken Patty\",\n  \"per_serving_weight_in_gm\": 10,\n  \"ingredient_list\": [\n    {\n      \"quantity\": 100,\n      \"unit\": \"G\",\n      \"ingredient_id\": \"65bcefbfac924f1103ba5024\",\n      \"yield_percent\": 100\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"receipe_id\": \"string\",\n    \"custom_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"per_serving_weight_in_gm\": 2925.290217028538,\n    \"per_serving_selling_price\": 5496.537234164282,\n    \"nutrients\": [\n      {\n        \"nutrient_id\": \"string\",\n        \"quantity\": 1250.6631184846217\n      },\n      {\n        \"nutrient_id\": \"string\",\n        \"quantity\": 4232.686507017715\n      }\n    ],\n    \"total_yield_in_gram\": 9750.535631475454,\n    \"total_calorie\": 1784.0269186970902,\n    \"allergen_id_list\": [\n      \"string\",\n      \"string\"\n    ],\n    \"diet_type_list\": [\n      {\n        \"diet_type_id\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"diet_type_id\": \"string\",\n        \"name\": \"string\"\n      }\n    ],\n    \"ingredient_list\": [\n      {\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"quantity\": 964.5964915790373,\n        \"yield_percent\": 6694.254864941934,\n        \"unit\": \"string\",\n        \"source\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"quantity\": 2577.5365932298487,\n        \"yield_percent\": 4925.981370845983,\n        \"unit\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd9564c5-1204-4561-a731-d46644c24de5",
+              "name": "Invalid query parameters or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Cheese Burger\",\n  \"category_id\": \"66012fac0bf5649bb780809d\",\n  \"sub_category_id\": \"66012fb11430426b0fdb7eb6\",\n  \"is_sub_recipe\": false,\n  \"description\": \"Cheese Burger with Double Chicken Patty\",\n  \"per_serving_weight_in_gm\": 10,\n  \"ingredient_list\": [\n    {\n      \"quantity\": 100,\n      \"unit\": \"G\",\n      \"ingredient_id\": \"65bcefbfac924f1103ba5024\",\n      \"yield_percent\": 100\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5409429b-2e22-4dae-b44b-d89fb962b4df",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Cheese Burger\",\n  \"category_id\": \"66012fac0bf5649bb780809d\",\n  \"sub_category_id\": \"66012fb11430426b0fdb7eb6\",\n  \"is_sub_recipe\": false,\n  \"description\": \"Cheese Burger with Double Chicken Patty\",\n  \"per_serving_weight_in_gm\": 10,\n  \"ingredient_list\": [\n    {\n      \"quantity\": 100,\n      \"unit\": \"G\",\n      \"ingredient_id\": \"65bcefbfac924f1103ba5024\",\n      \"yield_percent\": 100\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78392218-ee5c-4bb9-8402-4c86e8a554ec",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Cheese Burger\",\n  \"category_id\": \"66012fac0bf5649bb780809d\",\n  \"sub_category_id\": \"66012fb11430426b0fdb7eb6\",\n  \"is_sub_recipe\": false,\n  \"description\": \"Cheese Burger with Double Chicken Patty\",\n  \"per_serving_weight_in_gm\": 10,\n  \"ingredient_list\": [\n    {\n      \"quantity\": 100,\n      \"unit\": \"G\",\n      \"ingredient_id\": \"65bcefbfac924f1103ba5024\",\n      \"yield_percent\": 100\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b5894ef-5144-4f42-9c02-4d14d5992fce",
+          "name": "Get recipe details by ID",
+          "request": {
+            "name": "Get recipe details by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "recipes",
+                ":recipeId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "recipeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2aa90cdf-1bf4-4a2f-a565-fdc187034dd0",
+              "name": "Recipe detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ":recipeId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recipeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"receipe_id\": \"string\",\n    \"custom_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"per_serving_weight_in_gm\": 9208.12962917876,\n    \"per_serving_selling_price\": 6595.825798292521,\n    \"nutrients\": [\n      {\n        \"nutrient_id\": \"string\",\n        \"quantity\": 7156.188335050689\n      },\n      {\n        \"nutrient_id\": \"string\",\n        \"quantity\": 7437.689984253892\n      }\n    ],\n    \"total_yield_in_gram\": 9412.073404630024,\n    \"total_calorie\": 5113.68119179436,\n    \"allergen_id_list\": [\n      \"string\",\n      \"string\"\n    ],\n    \"diet_type_list\": [\n      {\n        \"diet_type_id\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"diet_type_id\": \"string\",\n        \"name\": \"string\"\n      }\n    ],\n    \"ingredient_list\": [\n      {\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"quantity\": 4627.926529943314,\n        \"yield_percent\": 6765.782109082532,\n        \"unit\": \"string\",\n        \"source\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"quantity\": 4893.907909259202,\n        \"yield_percent\": 9601.01264877815,\n        \"unit\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeb1bb61-567e-409a-96d5-81fe487a9864",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ":recipeId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recipeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61db4f11-733d-453f-8a50-7fd3e87a98c6",
+          "name": "Edit recipe",
+          "request": {
+            "name": "Edit recipe",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "recipes",
+                ":recipeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "recipeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"sub_category_id\": \"<string>\",\n  \"is_sub_recipe\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"per_serving_weight_in_gm\": \"<number>\",\n  \"ingredient_list\": [\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45ca1126-2320-4312-821a-9f8b6e619c34",
+              "name": "Recipe updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ":recipeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recipeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"sub_category_id\": \"<string>\",\n  \"is_sub_recipe\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"per_serving_weight_in_gm\": \"<number>\",\n  \"ingredient_list\": [\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"receipe_id\": \"string\",\n    \"custom_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"per_serving_weight_in_gm\": 29.170897534783748,\n    \"per_serving_selling_price\": 5786.179622565428,\n    \"nutrients\": [\n      {\n        \"nutrient_id\": \"string\",\n        \"quantity\": 5095.388510599498\n      },\n      {\n        \"nutrient_id\": \"string\",\n        \"quantity\": 3249.8672762473093\n      }\n    ],\n    \"total_yield_in_gram\": 3998.7442121035456,\n    \"total_calorie\": 5127.330213984002,\n    \"allergen_id_list\": [\n      \"string\",\n      \"string\"\n    ],\n    \"diet_type_list\": [\n      {\n        \"diet_type_id\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"diet_type_id\": \"string\",\n        \"name\": \"string\"\n      }\n    ],\n    \"ingredient_list\": [\n      {\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"quantity\": 1163.7927438098973,\n        \"yield_percent\": 5113.728458068925,\n        \"unit\": \"string\",\n        \"source\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"display_name\": \"string\",\n        \"quantity\": 6104.932217908987,\n        \"yield_percent\": 1024.1924523626878,\n        \"unit\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c7b0563-b9d1-4fe9-ad8e-0004ac4c7f72",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ":recipeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recipeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"sub_category_id\": \"<string>\",\n  \"is_sub_recipe\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"per_serving_weight_in_gm\": \"<number>\",\n  \"ingredient_list\": [\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\",\n      \"ingredient_id\": \"<string>\",\n      \"yield_percent\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38a19fd2-ee5a-4791-9ebc-3049f392fe0d",
+          "name": "Delete recipe",
+          "request": {
+            "name": "Delete recipe",
+            "description": {},
+            "url": {
+              "path": [
+                "external",
+                "api",
+                "v2",
+                "recipes",
+                ":recipeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "recipeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Access-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cbfa193d-2c2f-432e-b5b5-db7ee022c355",
+              "name": "Recipe deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ":recipeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recipeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Recipe deleted successfully.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a79315b9-5982-4582-b64e-b8171a9dbc39",
+              "name": "Invalid or missing access token / API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "external",
+                    "api",
+                    "v2",
+                    "recipes",
+                    ":recipeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "recipeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nutrical.co",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2d929a02-5124-4f7f-9a75-aa5833df4bb7",
+    "name": "NutriCal Food & Nutrition Entity Recipes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NutriCal API powers apps, programs, and websites with NutriCal's food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.\n\nContact Support:\n Name: NutriCal\n Email: info@nutrical.co",
+      "type": "text/plain"
+    }
+  }
+}

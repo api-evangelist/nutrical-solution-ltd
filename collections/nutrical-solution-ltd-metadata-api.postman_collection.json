@@ -1,0 +1,336 @@
+{
+  "item": [
+    {
+      "id": "91eb704f-019c-47d1-a95b-45d37c55439f",
+      "name": "Metadata",
+      "description": {
+        "content": "Public nutrient and allergen reference data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3067ccf3-4765-4073-8871-4fdc0162466c",
+          "name": "Get nutrient list",
+          "request": {
+            "name": "Get nutrient list",
+            "description": {
+              "content": "Public list of nutrients with bilingual (English/Arabic) names, type (MACRO/MICRO), unit, and daily-value metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "nutrients",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nutrient_type",
+                  "value": "<string>",
+                  "description": "Type of nutrient, e.g. MICRO."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Keyword to filter results by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "paginate",
+                  "value": "<integer>",
+                  "description": "Set to 1 to enable pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b6c1474-720a-44c2-8253-8b60253cc42b",
+              "name": "Nutrient list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "nutrients",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nutrient_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"code\": 8539,\n  \"data\": [\n    {\n      \"nutrient_id\": \"string\",\n      \"name\": [\n        {\n          \"language\": \"string\",\n          \"content\": \"string\"\n        },\n        {\n          \"language\": \"string\",\n          \"content\": \"string\"\n        }\n      ],\n      \"nutrient_type\": \"string\",\n      \"unit\": \"string\",\n      \"code\": \"string\",\n      \"order\": 675,\n      \"is_essential\": false,\n      \"allowed_daily_value\": 11.23171631284392,\n      \"group_nutrient_id\": \"string\"\n    },\n    {\n      \"nutrient_id\": \"string\",\n      \"name\": [\n        {\n          \"language\": \"string\",\n          \"content\": \"string\"\n        },\n        {\n          \"language\": \"string\",\n          \"content\": \"string\"\n        }\n      ],\n      \"nutrient_type\": \"string\",\n      \"unit\": \"string\",\n      \"code\": \"string\",\n      \"order\": 2010,\n      \"is_essential\": true,\n      \"allowed_daily_value\": 179.11087197538757,\n      \"group_nutrient_id\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"max_page\": 8571,\n    \"next_page\": 120,\n    \"previous_page\": 5849,\n    \"total_count\": 4361\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "537fc160-d372-489c-bcbf-f350f90da3f3",
+          "name": "Get allergen list",
+          "request": {
+            "name": "Get allergen list",
+            "description": {},
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "allergens",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "paginate",
+                  "value": "<integer>",
+                  "description": "Set to 1 to enable pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c96aadc1-f391-45ae-b2d2-813bae8dbc14",
+              "name": "Allergen list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "allergens",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"code\": 900,\n  \"data\": [\n    {\n      \"allergen_id\": \"659ba3554bb465a1de36fd3b\",\n      \"name\": \"Peanuts\",\n      \"icon\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b91af00-abb2-4237-b331-74aa94ca7859",
+          "name": "Get may-contain allergen list",
+          "request": {
+            "name": "Get may-contain allergen list",
+            "description": {},
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "may-contain-allergens",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "paginate",
+                  "value": "<integer>",
+                  "description": "Set to 1 to enable pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7773fd84-ab83-4817-882a-d5f2edc59e56",
+              "name": "May-contain allergen list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "may-contain-allergens",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paginate",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"code\": 900,\n  \"data\": [\n    {\n      \"may_contain_allergen_id\": \"663ba933145e0636856f1e81\",\n      \"name\": \"Mutton\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nutrical.co",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "51bb1c3d-ade9-4b91-9159-7a5ae0698a31",
+    "name": "NutriCal Food & Nutrition Entity Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NutriCal API powers apps, programs, and websites with NutriCal's food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.\n\nContact Support:\n Name: NutriCal\n Email: info@nutrical.co",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NutriCal Food & Nutrition Entity Recipes API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recipes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recipe list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/recipes/",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to filter results by name."
+              },
+              {
+                "name": "paginate",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to enable pagination."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              },
+              {
+                "name": "category_id__list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by category id."
+              },
+              {
+                "name": "diet_type_id__list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by diet type id."
+              },
+              {
+                "name": "allergen_id__list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by allergen id."
+              },
+              {
+                "name": "may_contain_allergen_id__list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by may-contain allergen id."
+              },
+              {
+                "name": "is_sub_recipe",
+                "value": "",
+                "type": "query",
+                "description": "Filter sub-recipes."
+              },
+              {
+                "name": "status__list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status, e.g. DRAFT, PUBLISHED."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of recipes, optionally filtered by search keyword, category, diet type, allergen, may-contain allergen, sub-recipe flag, and status."
+        },
+        {
+          "info": {
+            "name": "Create recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nutrical.co/external/api/v2/recipes/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create recipe"
+        },
+        {
+          "info": {
+            "name": "Get recipe details by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nutrical.co/external/api/v2/recipes/:recipeId/",
+            "params": [
+              {
+                "name": "recipeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get recipe details by ID"
+        },
+        {
+          "info": {
+            "name": "Edit recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.nutrical.co/external/api/v2/recipes/:recipeId",
+            "params": [
+              {
+                "name": "recipeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Edit recipe"
+        },
+        {
+          "info": {
+            "name": "Delete recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nutrical.co/external/api/v2/recipes/:recipeId",
+            "params": [
+              {
+                "name": "recipeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Access-Token",
+              "value": "{{Access-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete recipe"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
