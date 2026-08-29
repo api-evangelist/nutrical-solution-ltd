@@ -12,6 +12,18 @@ description: >-
   exposes a Food & Nutrition API so apps, programs, and websites can search
   ingredients, create and analyze recipes, manage recipe categories, build meal
   plans, and read nutrient and allergen metadata. Backed by 500 Global.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
