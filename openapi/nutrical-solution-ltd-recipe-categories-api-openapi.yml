@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NutriCal Food & Nutrition Entity Recipe Categories API
+  title: NutriCal Food & Nutrition Recipe Categories API
   version: '2.0'
-  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling.'
   contact:
     name: NutriCal
     url: https://www.nutrical.co
@@ -181,14 +181,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    RecipeCategory:
-      type: object
-      properties:
-        recipe_category_id:
-          type: string
-        name:
-          type: string
   parameters:
     Search:
       name: search
@@ -197,6 +189,14 @@ components:
       schema:
         type: string
       description: Keyword to filter results by name.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
     Paginate:
       name: paginate
       in: query
@@ -207,14 +207,6 @@ components:
         - 0
         - 1
       description: Set to 1 to enable pagination.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-      description: Number of records per page.
     Page:
       name: page
       in: query
@@ -226,6 +218,14 @@ components:
   responses:
     Unauthorized:
       description: Invalid or missing access token / API key.
+  schemas:
+    RecipeCategory:
+      type: object
+      properties:
+        recipe_category_id:
+          type: string
+        name:
+          type: string
   securitySchemes:
     AccessToken:
       type: apiKey

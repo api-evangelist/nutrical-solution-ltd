@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NutriCal Food & Nutrition Entity Meal Plans API
+  title: NutriCal Food & Nutrition Meal Plans API
   version: '2.0'
-  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling. Two public metadata endpoints require no authentication; entity-scoped recipe, category, and meal-plan operations are authenticated with an entity Access-Token; entity provisioning uses an organization API Key.'
+  description: 'The NutriCal API powers apps, programs, and websites with NutriCal''s food and nutrition intelligence for the GCC and beyond: an ingredient database of 40,000+ foods (USDA + NutriCal proprietary), recipe management and nutrition analysis, recipe categories, meal-plan management with per-customer meal plans, and nutrient/allergen metadata used for Saudi FDA / GCC-compliant food labeling.'
   contact:
     name: NutriCal
     url: https://www.nutrical.co
@@ -304,6 +304,15 @@ components:
           type: array
           items:
             type: string
+    MealPlanCustomer:
+      allOf:
+      - $ref: '#/components/schemas/MealPlanCustomerInput'
+      - type: object
+        properties:
+          mealplan_customer_id:
+            type: string
+          created_at:
+            type: string
     MealPlanSummary:
       type: object
       properties:
@@ -321,8 +330,9 @@ components:
           type: string
           format: date
         meal_plan_customer:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             meal_plan_customer_id:
               type: string
@@ -330,15 +340,6 @@ components:
               type: string
             last_name:
               type: string
-    MealPlanCustomer:
-      allOf:
-      - $ref: '#/components/schemas/MealPlanCustomerInput'
-      - type: object
-        properties:
-          mealplan_customer_id:
-            type: string
-          created_at:
-            type: string
   parameters:
     Search:
       name: search
@@ -347,6 +348,14 @@ components:
       schema:
         type: string
       description: Keyword to filter results by name.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
     Paginate:
       name: paginate
       in: query
@@ -365,14 +374,6 @@ components:
         type: integer
         default: 10
       description: Number of records per page.
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number to retrieve.
   responses:
     Unauthorized:
       description: Invalid or missing access token / API key.

@@ -1,12 +1,7 @@
 {
   "provider": "nutrical-solution-ltd",
   "sources": [
-    "nutrical-solution-ltd-entity-api-openapi.yml",
-    "nutrical-solution-ltd-ingredients-api-openapi.yml",
-    "nutrical-solution-ltd-meal-plans-api-openapi.yml",
-    "nutrical-solution-ltd-metadata-api-openapi.yml",
-    "nutrical-solution-ltd-recipe-categories-api-openapi.yml",
-    "nutrical-solution-ltd-recipes-api-openapi.yml"
+    "_original/nutrical-solution-ltd-openapi.yml"
   ],
   "outputs": [
     "nutrical-solution-ltd-entity-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nutrical-solution-ltd-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nutrical-solution-ltd-entity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nutrical-solution-ltd-ingredients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nutrical-solution-ltd-meal-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nutrical-solution-ltd-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nutrical-solution-ltd-recipe-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nutrical-solution-ltd-recipes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
