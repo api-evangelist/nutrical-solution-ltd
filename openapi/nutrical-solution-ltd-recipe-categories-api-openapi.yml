@@ -215,9 +215,6 @@ components:
         type: integer
         default: 1
       description: Page number to retrieve.
-  responses:
-    Unauthorized:
-      description: Invalid or missing access token / API key.
   schemas:
     RecipeCategory:
       type: object
@@ -226,6 +223,9 @@ components:
           type: string
         name:
           type: string
+  responses:
+    Unauthorized:
+      description: Invalid or missing access token / API key.
   securitySchemes:
     AccessToken:
       type: apiKey

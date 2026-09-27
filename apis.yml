@@ -1,5 +1,5 @@
 aid: nutrical-solution-ltd
-name: Nutrical Solution Ltd
+name: Nutrical Solution
 description: >-
   NutriCal (Nutrical Solution Ltd) is the GCC's food nutrition and intelligence
   platform, offering the region's first Saudi FDA / GCC-compliant food-label and
@@ -234,3 +234,4 @@ x-enrichment:
   status: enriched
   artifacts_added: 15
   pass: local-v1
+x-legal-name: Nutrical Solution Ltd

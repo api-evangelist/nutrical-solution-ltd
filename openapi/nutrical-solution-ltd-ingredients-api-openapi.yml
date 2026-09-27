@@ -80,14 +80,6 @@ components:
       schema:
         type: string
       description: Keyword to filter results by name.
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number to retrieve.
     Paginate:
       name: paginate
       in: query
@@ -106,6 +98,14 @@ components:
         type: integer
         default: 10
       description: Number of records per page.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
   schemas:
     Ingredient:
       type: object
@@ -135,10 +135,10 @@ components:
         total_count:
           type: integer
   responses:
-    BadRequest:
-      description: Invalid query parameters or request body.
     Unauthorized:
       description: Invalid or missing access token / API key.
+    BadRequest:
+      description: Invalid query parameters or request body.
     ServerError:
       description: Unexpected server error.
   securitySchemes:

@@ -225,36 +225,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    RecipeInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        category_id:
-          type: string
-        sub_category_id:
-          type: string
-        is_sub_recipe:
-          type: boolean
-        description:
-          type: string
-        per_serving_weight_in_gm:
-          type: number
-        ingredient_list:
-          type: array
-          items:
-            type: object
-            properties:
-              quantity:
-                type: number
-              unit:
-                type: string
-              ingredient_id:
-                type: string
-              yield_percent:
-                type: number
     RecipeDetail:
       type: object
       properties:
@@ -358,6 +328,36 @@ components:
         status:
           type: string
           description: DRAFT or PUBLISHED.
+    RecipeInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        category_id:
+          type: string
+        sub_category_id:
+          type: string
+        is_sub_recipe:
+          type: boolean
+        description:
+          type: string
+        per_serving_weight_in_gm:
+          type: number
+        ingredient_list:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+              unit:
+                type: string
+              ingredient_id:
+                type: string
+              yield_percent:
+                type: number
   parameters:
     Search:
       name: search
@@ -366,14 +366,6 @@ components:
       schema:
         type: string
       description: Keyword to filter results by name.
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number to retrieve.
     Paginate:
       name: paginate
       in: query
@@ -392,13 +384,21 @@ components:
         type: integer
         default: 10
       description: Number of records per page.
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
   responses:
-    ServerError:
-      description: Unexpected server error.
-    BadRequest:
-      description: Invalid query parameters or request body.
     Unauthorized:
       description: Invalid or missing access token / API key.
+    BadRequest:
+      description: Invalid query parameters or request body.
+    ServerError:
+      description: Unexpected server error.
   securitySchemes:
     AccessToken:
       type: apiKey
