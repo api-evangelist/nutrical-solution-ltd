@@ -129,7 +129,56 @@ paths:
                 - may_contain_allergen_id: 663ba933145e0636856f1e81
                   name: Mutton
 components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number to retrieve.
+    Paginate:
+      name: paginate
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+      description: Set to 1 to enable pagination.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Keyword to filter results by name.
   schemas:
+    Pagination:
+      type: object
+      properties:
+        max_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        previous_page:
+          type:
+          - integer
+          - 'null'
+        total_count:
+          type: integer
     Nutrient:
       type: object
       properties:
@@ -160,55 +209,6 @@ components:
           type:
           - string
           - 'null'
-    Pagination:
-      type: object
-      properties:
-        max_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        previous_page:
-          type:
-          - integer
-          - 'null'
-        total_count:
-          type: integer
-  parameters:
-    Search:
-      name: search
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Keyword to filter results by name.
-    Paginate:
-      name: paginate
-      in: query
-      required: false
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
-      description: Set to 1 to enable pagination.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-      description: Number of records per page.
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number to retrieve.
   securitySchemes:
     AccessToken:
       type: apiKey
