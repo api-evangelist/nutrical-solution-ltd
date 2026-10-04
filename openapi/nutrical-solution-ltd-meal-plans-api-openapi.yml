@@ -276,6 +276,14 @@ components:
         type: integer
         default: 1
       description: Page number to retrieve.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
     Paginate:
       name: paginate
       in: query
@@ -286,14 +294,6 @@ components:
         - 0
         - 1
       description: Set to 1 to enable pagination.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-      description: Number of records per page.
     Search:
       name: search
       in: query
@@ -302,6 +302,33 @@ components:
         type: string
       description: Keyword to filter results by name.
   schemas:
+    MealPlanSummary:
+      type: object
+      properties:
+        meal_plan_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+        created_user_id:
+          type: string
+        updated_at:
+          type: string
+        date:
+          type: string
+          format: date
+        meal_plan_customer:
+          type:
+          - object
+          - 'null'
+          properties:
+            meal_plan_customer_id:
+              type: string
+            first_name:
+              type: string
+            last_name:
+              type: string
     MealPlanCustomerInput:
       type: object
       properties:
@@ -338,33 +365,6 @@ components:
           type: array
           items:
             type: string
-    MealPlanSummary:
-      type: object
-      properties:
-        meal_plan_id:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
-        created_user_id:
-          type: string
-        updated_at:
-          type: string
-        date:
-          type: string
-          format: date
-        meal_plan_customer:
-          type:
-          - object
-          - 'null'
-          properties:
-            meal_plan_customer_id:
-              type: string
-            first_name:
-              type: string
-            last_name:
-              type: string
     MealPlanCustomer:
       allOf:
       - $ref: '#/components/schemas/MealPlanCustomerInput'

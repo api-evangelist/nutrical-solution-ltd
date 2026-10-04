@@ -233,6 +233,14 @@ components:
         type: integer
         default: 1
       description: Page number to retrieve.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
     Paginate:
       name: paginate
       in: query
@@ -243,14 +251,6 @@ components:
         - 0
         - 1
       description: Set to 1 to enable pagination.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-      description: Number of records per page.
     Search:
       name: search
       in: query
@@ -258,7 +258,55 @@ components:
       schema:
         type: string
       description: Keyword to filter results by name.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+    BadRequest:
+      description: Invalid query parameters or request body.
   schemas:
+    RecipeSummary:
+      type: object
+      properties:
+        recipe_id:
+          type: string
+        name:
+          type: string
+        category:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        allergen_id_list:
+          type: array
+          items:
+            type: string
+        may_contain_id_list:
+          type: array
+          items:
+            type: string
+        diet_type_id_list:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        is_sub_recipe:
+          type:
+          - boolean
+          - 'null'
+        cover_image:
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+          description: DRAFT or PUBLISHED.
     RecipeDetail:
       type: object
       properties:
@@ -321,47 +369,6 @@ components:
                 type: string
               source:
                 type: string
-    RecipeSummary:
-      type: object
-      properties:
-        recipe_id:
-          type: string
-        name:
-          type: string
-        category:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-        allergen_id_list:
-          type: array
-          items:
-            type: string
-        may_contain_id_list:
-          type: array
-          items:
-            type: string
-        diet_type_id_list:
-          type: array
-          items:
-            type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        is_sub_recipe:
-          type:
-          - boolean
-          - 'null'
-        cover_image:
-          type:
-          - string
-          - 'null'
-        status:
-          type: string
-          description: DRAFT or PUBLISHED.
     RecipeInput:
       type: object
       required:
@@ -392,13 +399,6 @@ components:
                 type: string
               yield_percent:
                 type: number
-  responses:
-    BadRequest:
-      description: Invalid query parameters or request body.
-    Unauthorized:
-      description: Invalid or missing access token / API key.
-    ServerError:
-      description: Unexpected server error.
   securitySchemes:
     AccessToken:
       type: apiKey

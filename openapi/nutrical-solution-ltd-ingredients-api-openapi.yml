@@ -81,6 +81,14 @@ components:
         type: integer
         default: 1
       description: Page number to retrieve.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
     Paginate:
       name: paginate
       in: query
@@ -91,14 +99,6 @@ components:
         - 0
         - 1
       description: Set to 1 to enable pagination.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-      description: Number of records per page.
     Search:
       name: search
       in: query
@@ -106,7 +106,26 @@ components:
       schema:
         type: string
       description: Keyword to filter results by name.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+    Unauthorized:
+      description: Invalid or missing access token / API key.
+    BadRequest:
+      description: Invalid query parameters or request body.
   schemas:
+    Ingredient:
+      type: object
+      properties:
+        ingredient_id:
+          type: string
+        name:
+          type: string
+        source:
+          type: string
+          description: USDA or NUTRICAL.
+        is_starred:
+          type: boolean
     Pagination:
       type: object
       properties:
@@ -122,25 +141,6 @@ components:
           - 'null'
         total_count:
           type: integer
-    Ingredient:
-      type: object
-      properties:
-        ingredient_id:
-          type: string
-        name:
-          type: string
-        source:
-          type: string
-          description: USDA or NUTRICAL.
-        is_starred:
-          type: boolean
-  responses:
-    BadRequest:
-      description: Invalid query parameters or request body.
-    Unauthorized:
-      description: Invalid or missing access token / API key.
-    ServerError:
-      description: Unexpected server error.
   securitySchemes:
     AccessToken:
       type: apiKey

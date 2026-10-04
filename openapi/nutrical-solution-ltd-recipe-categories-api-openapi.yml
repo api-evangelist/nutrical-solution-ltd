@@ -190,6 +190,14 @@ components:
         type: integer
         default: 1
       description: Page number to retrieve.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of records per page.
     Paginate:
       name: paginate
       in: query
@@ -200,14 +208,6 @@ components:
         - 0
         - 1
       description: Set to 1 to enable pagination.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-      description: Number of records per page.
     Search:
       name: search
       in: query
