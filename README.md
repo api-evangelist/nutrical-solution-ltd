@@ -1,4 +1,4 @@
-# Nutrical Solution Ltd
+# Nutrical Solution
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,6 +64,126 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Nutrical Solution Ltd is a company surfaced as a portfolio company of 500-global and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+NutriCal (Nutrical Solution Ltd) is the GCC's food nutrition and intelligence platform, offering the region's first Saudi FDA / GCC-compliant food-label and calorie-analysis software. Its SaaS lets restaurants, cafes, hotels, food manufacturers, bakeries, catering companies, nutrition centres, and meal-plan businesses register products, generate bilingual (English/Arabic) nutrition and ingredient labels, manage and cost recipes, run nutrition analysis, and build customer meal plans against an ingredient database of 40,000+ foods sourced from USDA data and NutriCal's proprietary local database. NutriCal also exposes a Food & Nutrition API so apps, programs, and websites can search ingredients, create and analyze recipes, manage recipe categories, build meal plans, and read nutrient and allergen metadata. Backed by 500 Global.
 
-Backed by: 500-global — https://nutrical.co
+**Areas:** Company · Food · Nutrition · Health · Recipes · Meal Plans · Food Labeling · Compliance · Restaurant · GCC
+
+## Nutrical Solution on APIs.io
+
+Everything profiled for Nutrical Solution is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nutrical-solution-ltd/](https://apis.io/providers/nutrical-solution-ltd/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [Nutrical Solution Ltd Entity API](https://apis.io/apis/nutrical-solution-ltd/nutrical-solution-ltd-entity-api/) — Provision entities that own recipes and receive a client access token.
+- [Nutrical Solution Ltd Ingredients API](https://apis.io/apis/nutrical-solution-ltd/nutrical-solution-ltd-ingredients-api/) — Search the NutriCal ingredient database (USDA + NutriCal sources).
+- [Nutrical Solution Ltd Meal Plans API](https://apis.io/apis/nutrical-solution-ltd/nutrical-solution-ltd-meal-plans-api/) — Manage meal plans and meal-plan customers.
+- [Nutrical Solution Ltd Metadata API](https://apis.io/apis/nutrical-solution-ltd/nutrical-solution-ltd-metadata-api/) — Public nutrient and allergen reference data.
+- [Nutrical Solution Ltd Recipe Categories API](https://apis.io/apis/nutrical-solution-ltd/nutrical-solution-ltd-recipe-categories-api/) — Manage recipe categories and sub-categories.
+- [Nutrical Solution Ltd Recipes API](https://apis.io/apis/nutrical-solution-ltd/nutrical-solution-ltd-recipes-api/) — Create, read, update, and delete recipes with nutrition analysis.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [nutrical](https://apis.io/servers/nutrical-solution-ltd/nutrical/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Nutrical Solution Ltd Agentic Access](https://apis.io/agentic-access/nutrical-solution-ltd/nutrical-solution-ltd-agentic-access/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [NutriCal Food & Nutrition Entity API](https://apis.io/collections/nutrical-solution-ltd/open-nutrical-solution-ltd-entity-api/)
+- [NutriCal Food & Nutrition Entity Ingredients API](https://apis.io/collections/nutrical-solution-ltd/open-nutrical-solution-ltd-ingredients-api/)
+- [NutriCal Food & Nutrition Entity Meal Plans API](https://apis.io/collections/nutrical-solution-ltd/open-nutrical-solution-ltd-meal-plans-api/)
+- [NutriCal Food & Nutrition Entity Metadata API](https://apis.io/collections/nutrical-solution-ltd/open-nutrical-solution-ltd-metadata-api/)
+- [NutriCal Food & Nutrition Entity Recipe Categories API](https://apis.io/collections/nutrical-solution-ltd/open-nutrical-solution-ltd-recipe-categories-api/)
+- [NutriCal Food & Nutrition Entity Recipes API](https://apis.io/collections/nutrical-solution-ltd/open-nutrical-solution-ltd-recipes-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Nutrical Solution Ltd Openapi Overlay](https://apis.io/overlays/nutrical-solution-ltd/nutrical-solution-ltd-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Nutrical Solution Ltd Authentication](https://apis.io/security/nutrical-solution-ltd/nutrical-solution-ltd-authentication/)
+- [Nutrical Solution Ltd Domain Security](https://apis.io/security/nutrical-solution-ltd/nutrical-solution-ltd-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.nutrical.co)
+- [Documentation](https://docs.nutrical.co)
+- [API reference](https://docs.nutrical.co)
+- [Pricing](https://www.nutrical.co/pricing/)
+- [Sign up](https://app.nutrical.co)
+- [Support](https://www.nutrical.co/contact-us/)
+- [Blog](https://www.nutrical.co/blog/)
+- [Terms of service](https://www.nutrical.co/terms-of-sales/)
+- [Privacy policy](https://www.nutrical.co/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 30.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 17.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 31.6 |
+
+**Agent readiness 23.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 23.4** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nutrical-solution-ltd/](https://apis.io/providers/nutrical-solution-ltd/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nutrical Solution: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nutrical-solution-ltd/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
